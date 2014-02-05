@@ -14,3 +14,8 @@
 
 # Sublime ignore
 *.sublime*
+
+#LaTeX files
+*.aux
+*.log
+*.pdf
