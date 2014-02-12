@@ -8,7 +8,7 @@ import sys, os, os.path, glob
 from lib.run_util import *
 import lib.stats as stats
 
-# Uncomment this to print commands instead of executing them.
+# Uncomment this to print commmmmands instead of executing them.
 #dry_run()
 
 
