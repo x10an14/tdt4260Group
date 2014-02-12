@@ -1,0 +1,11 @@
+Kommandoer dere skal kjøre (i rekkefølge!) for å få til M5 på linux systemet jeg linket til:
+
+sudo aptitude install g++-4.4 python-dev scons swig zlib1g-dev m4
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.4 10
+
+//Her må dere nå huske å kjøre "sudo update-alternatives --config g++" og forsikre dere om at g++-4.4 er valgt!!!!
+//Bekreft etterpå med "g++ --version"
+
+git pull
+./compile
+./test_prefetcher.py
