@@ -58,7 +58,7 @@ class SourceMeta(type):
     def __init__(cls, name, bases, dict):
         super(SourceMeta, cls).__init__(name, bases, dict)
         cls.all = []
-        
+
     def get(cls, **kwargs):
         for src in cls.all:
             for attr,value in kwargs.iteritems():
@@ -96,10 +96,10 @@ class SourceFile(object):
     def __ge__(self, other): return self.filename >= other.filename
     def __eq__(self, other): return self.filename == other.filename
     def __ne__(self, other): return self.filename != other.filename
-        
+
 class Source(SourceFile):
     '''Add a c/c++ source file to the build'''
-    def __init__(self, source, Werror=True, swig=False, bin_only=False,
+    def __init__(self, source, Werror=False, swig=False, bin_only=False,
                  skip_lib=False):
         super(Source, self).__init__(source)
 
@@ -114,7 +114,7 @@ class PySource(SourceFile):
     modules = {}
     tnodes = {}
     symnames = {}
-    
+
     def __init__(self, package, source):
         super(PySource, self).__init__(source)
 
@@ -229,7 +229,7 @@ for extra_dir in extras_dir_list:
     env.Append(CPPPATH=Dir(extra_dir))
 
 # Workaround for bug in SCons version > 0.97d20071212
-# Scons bug id: 2006 M5 Bug id: 308 
+# Scons bug id: 2006 M5 Bug id: 308
 for root, dirs, files in os.walk(base_dir, topdown=True):
     Dir(root[len(base_dir) + 1:])
 
@@ -265,9 +265,9 @@ def makeTheISA(source, target, env):
     target = env['TARGET_ISA']
     def define(isa):
         return isa.upper() + '_ISA'
-    
+
     def namespace(isa):
-        return isa[0].upper() + isa[1:].lower() + 'ISA' 
+        return isa[0].upper() + isa[1:].lower() + 'ISA'
 
 
     print >>f, '#ifndef __CONFIG_THE_ISA_HH__'
@@ -279,7 +279,7 @@ def makeTheISA(source, target, env):
     print >>f, '#define THE_ISA %s' % (define(target))
     print >>f, '#define TheISA %s' % (namespace(target))
     print >>f
-    print >>f, '#endif // __CONFIG_THE_ISA_HH__'  
+    print >>f, '#endif // __CONFIG_THE_ISA_HH__'
 
 env.Command('config/the_isa.hh', map(Value, all_isa_list), makeTheISA)
 
@@ -673,7 +673,7 @@ def getFlags(source_flags):
         name, compound, desc = val
         flagsList.append(val)
         flagsMap[name] = bool(compound)
-    
+
     for name, compound, desc in flagsList:
         for flag in compound:
             if flag not in flagsMap:
@@ -691,7 +691,7 @@ def traceFlagsPy(target, source, env):
     assert(len(target) == 1)
 
     f = file(str(target[0]), 'w')
-   
+
     allFlags = getFlags(source)
 
     print >>f, 'basic = ['
@@ -940,7 +940,7 @@ def pythonInit(target, source, env):
         print >>dst, '      %s_beg, %s_end,' % (sym, sym)
         print >>dst, '      %s_end - %s_beg,' % (sym, sym)
         print >>dst, '      *(int *)%s_end }%s'  % (sym, endchar)
-    
+
     print >>dst, '#include "sim/init.hh"'
 
     for sym in source:
@@ -1029,7 +1029,7 @@ def makeEnv(label, objsfx, strip = False, **kwargs):
 
     static_date = make_obj(date_source, static=True, extra_deps=static_objs)
     static_objs.append(static_date)
-    
+
     shared_date = make_obj(date_source, static=False, extra_deps=shared_objs)
     shared_objs.append(shared_date)
 
@@ -1056,7 +1056,7 @@ def makeEnv(label, objsfx, strip = False, **kwargs):
         else:
             cmd = 'strip $SOURCE -o $TARGET'
         targets = new_env.Command(exename, progname, cmd)
-            
+
     new_env.M5Binary = targets[0]
     envList.append(new_env)
 
