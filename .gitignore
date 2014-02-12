@@ -2,6 +2,7 @@
 *.slo
 *.lo
 *.o
+*.pyc
 
 # Compiled Dynamic libraries
 *.so
@@ -22,3 +23,10 @@
 
 # Huge lib folder
 lib
+
+# Build/test outputs
+m5/build
+output
+
+# Automatically generated stuff
+m5/parsetab.py
