@@ -99,7 +99,7 @@ class SourceFile(object):
         
 class Source(SourceFile):
     '''Add a c/c++ source file to the build'''
-    def __init__(self, source, Werror=True, swig=False, bin_only=False,
+    def __init__(self, source, Werror=False, swig=False, bin_only=False,
                  skip_lib=False):
         super(Source, self).__init__(source)
 
@@ -629,7 +629,7 @@ def buildParams(target, source, env):
 
         print >>out, code
 
-    print >>out, '%%include "src/sim/sim_object_params.hh"' % obj
+    print >>out, '%include "src/sim/sim_object_params.hh"' # % obj
     for obj in ordered_objs:
         print >>out, '%%include "params/%s.hh"' % obj
 
