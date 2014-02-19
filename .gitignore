@@ -21,6 +21,12 @@
 *.log
 *.pdf
 
+#IEEEtran archive/folder
+IEEEtran.tar
+IEEEtran/
+report/README
+report/changelog.txt
+
 # Huge lib folder
 lib
 
@@ -30,3 +36,4 @@ output
 
 # Automatically generated stuff
 m5/parsetab.py
+stats.txt
