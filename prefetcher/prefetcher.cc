@@ -11,6 +11,8 @@
 #define NUM_DELTAS 8
 #define TABLE_SIZE 128
 
+ using namespace std;
+
 typedef int Delta;
 
 //Entry struct declaration (Entry == row in DCPT table)
@@ -51,8 +53,8 @@ Entry &table_lookup(Addr pc){
 }
 
 //wtf is it this one is supposed to do?
-std::vector<Addr> delta_correlation(const Entry &entry){
-	std::vector<Addr> candidates;
+vector<Addr> delta_correlation(const Entry &entry){
+	vector<Addr> candidates;
 
 	Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS];
 	Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS];
@@ -75,15 +77,18 @@ std::vector<Addr> delta_correlation(const Entry &entry){
 }
 
 //Filter what?
-std::vector<Addr> prefetch_filter(const Entry &entry, const std::vector<Addr> &candidates){
-	// TODO: implement
+vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates){
+	vector<Addr> prefetches;
+	for (vector<candidates>::iterator i = candidates.begin(); i != candidates.end(); ++i){
+		if i
+	}
 	return candidates;
 }
 
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
-void issue_prefetches(const std::vector<Addr> &prefetches){
-	std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+void issue_prefetches(const vector<Addr> &prefetches){
+	for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
 }
 
 void prefetch_complete(Addr addr) {
@@ -112,8 +117,8 @@ void prefetch_access(AccessStat stat){
 		entry.insert_delta(addr - entry.last_address);
 		entry.last_address = addr;
 
-		std::vector<Addr> candidates = delta_correlation(entry);
-		std::vector<Addr> prefetches = prefetch_filter(entry, candidates);
+		vector<Addr> candidates = delta_correlation(entry);
+		vector<Addr> prefetches = prefetch_filter(entry, candidates);
 		issue_prefetches(prefetches);
 	}
 }
