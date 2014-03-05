@@ -74,14 +74,12 @@ vector<Addr> delta_correlation(const Entry &entry){
 	return candidates;
 }
 
-//Filter what?
 vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates){
 	vector<Addr> prefetches;
 	for (vector<candidates>::iterator i = candidates.begin(); i != candidates.end(); ++i){
-		//if prefetch(i) has been requested (inFlight), but not yet received, and
-		if(in_mshr_queue(i) == 1 && in_cache(i) == 1){
+		if(inFlight.find(i) == inFlight.end() && in_mshr_queue(i) == 1 && in_cache(i) == 1){
 			prefetches.push_back(i);
-			//Add i to inFlight[]
+			inFlight.insert(i);
 		}
 		if(i == entry.last_prefetch){
 			prefetches == NULL;
@@ -94,7 +92,7 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 //(Or so I assume?)
 void issue_prefetches(const vector<Addr> &prefetches){
 	for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
-	in_flight.insert(prefetches.begin(), prefetches.end());
+	//in_flight.insert(prefetches.begin(), prefetches.end());
 }
 
 void prefetch_complete(Addr addr) {
