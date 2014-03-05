@@ -16,6 +16,9 @@
 # Sublime ignore
 *.sublime*
 
+# Ingebrigt editor ignore
+*~
+
 #LaTeX files
 *.aux
 *.log
