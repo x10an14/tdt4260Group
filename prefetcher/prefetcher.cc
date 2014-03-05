@@ -23,7 +23,7 @@ struct Entry{
 	Addr pc;
 	Addr last_address;
 	Addr last_prefetch;
-    std::deque<Delta> deltas;
+	deque<Delta> deltas;
 
 	//Constructor
 	Entry(Addr pc = 0, Addr addr = 0){
@@ -34,9 +34,9 @@ struct Entry{
 
 	//Construct function (object function)
 	void insert_delta(Delta delta){
-        deltas.push_back(delta);
-        if(deltas.size() > NUM_DELTAS)
-            deltas.pop_front();
+		deltas.push_back(delta);
+		if(deltas.size() > NUM_DELTAS)
+			deltas.pop_front();
 	}
 };
 
@@ -92,16 +92,16 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
-void issue_prefetches(const std::vector<Addr> &prefetches){
-    std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
-    in_flight.insert(prefetches.begin(), prefetches.end());
+void issue_prefetches(const vector<Addr> &prefetches){
+	for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+	in_flight.insert(prefetches.begin(), prefetches.end());
 }
 
 void prefetch_complete(Addr addr) {
 	/*
 	 * Called when a block requested by the prefetcher has been loaded.
 	 */
-    in_flight.erase(addr);
+	in_flight.erase(addr);
 }
 
 void prefetch_init(void){
