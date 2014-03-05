@@ -52,26 +52,26 @@ Entry &table_lookup(Addr pc){
 
 //wtf is it this one is supposed to do?
 std::vector<Addr> delta_correlation(const Entry &entry){
-    std::vector<Addr> candidates;
+	std::vector<Addr> candidates;
 
-    Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS]; 
-    Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS]; 
+	Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS];
+	Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS];
 
-    Addr address = entry.last_address;
+	Addr address = entry.last_address;
 
-    for(/* each pair u, v in entry.deltas */)
-    {
-        if(entry.deltas[i] == d1 && entry.deltas[j] == d2)
-        {
-            for(/* each delta remaining in entry.deltas */)
-            {
-                address += delta;
-                candidates.push_back(address);
-            }
-        }
-    }
+	for(/* each pair u, v in entry.deltas */)
+	{
+		if(entry.deltas[i] == d1 && entry.deltas[j] == d2)
+		{
+			for(/* each delta remaining in entry.deltas */)
+			{
+				address += delta;
+				candidates.push_back(address);
+			}
+		}
+	}
 
-    return candidates;
+	return candidates;
 }
 
 //Filter what?
@@ -83,7 +83,7 @@ std::vector<Addr> prefetch_filter(const Entry &entry, const std::vector<Addr> &c
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
 void issue_prefetches(const std::vector<Addr> &prefetches){
-    std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+	std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
 }
 
 void prefetch_complete(Addr addr) {
