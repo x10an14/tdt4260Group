@@ -23,6 +23,7 @@
 *.aux
 *.log
 *.pdf
+*.synctex.gz
 
 #IEEEtran archive/folder
 IEEEtran.tar
