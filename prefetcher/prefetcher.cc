@@ -5,6 +5,9 @@
  */
 
 #include <algorithm>
+#include <deque>
+#include <set>
+#include <vector>
 #include "interface.hh"
 
 // TODO: I just chose these constants somewhat arbitrarily. Should choose these more carefully.
@@ -20,31 +23,26 @@ struct Entry{
 	Addr pc;
 	Addr last_address;
 	Addr last_prefetch;
-	Delta deltas[NUM_DELTAS];
-	int  delta_pointer;
+    std::deque<Delta> deltas;
 
 	//Constructor
 	Entry(Addr pc = 0, Addr addr = 0){
 		this->pc = pc;
 		this->last_address  = addr;
 		this->last_prefetch = 0;
-
-		for(int i = 0; i < NUM_DELTAS; ++i){
-			this->deltas[i] = 0;
-		}
-
-		this->delta_pointer = 0;
 	}
 
 	//Construct function (object function)
 	void insert_delta(Delta delta){
-		this->deltas[this->delta_pointer] = delta;
-		this->delta_pointer = (this->delta_pointer + 1) % NUM_DELTAS;
+        deltas.push_back(delta);
+        if(deltas.size() > NUM_DELTAS)
+            deltas.pop_front();
 	}
 };
 
 //The global table holding all of the Entry rows for the DCPT implementation.
 Entry table[TABLE_SIZE];
+set<Addr> in_flight;
 
 //wtf does this function do?
 Entry &table_lookup(Addr pc){
@@ -94,14 +92,16 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
-void issue_prefetches(const vector<Addr> &prefetches){
-	for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+void issue_prefetches(const std::vector<Addr> &prefetches){
+    std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+    in_flight.insert(prefetches.begin(), prefetches.end());
 }
 
 void prefetch_complete(Addr addr) {
 	/*
 	 * Called when a block requested by the prefetcher has been loaded.
 	 */
+    in_flight.erase(addr);
 }
 
 void prefetch_init(void){
@@ -128,11 +128,5 @@ void prefetch_access(AccessStat stat){
 		vector<Addr> prefetches = prefetch_filter(entry, candidates);
 		issue_prefetches(prefetches);
 	}
-}
-
-void prefetch_complete(Addr addr){
-	/*
-	 * Called when a block requested by the prefetcher has been loaded.
-	 */
 }
 
