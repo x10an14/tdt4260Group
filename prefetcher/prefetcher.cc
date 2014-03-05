@@ -4,123 +4,38 @@
  * was just accessed. It also ignores requests to blocks already in the cache.
  */
 
-#include <algorithm>
 #include "interface.hh"
 
-// TODO: I just chose these constants somewhat arbitrarily. Should choose these more carefully.
-#define NUM_DELTAS 8
-#define TABLE_SIZE 128
 
-typedef int Delta;
+void prefetch_init(void)
+{
+    /* Called before any calls to prefetch_access. */
+    /* This is the place to initialize data structures. */
 
-//Entry struct declaration (Entry == row in DCPT table)
-struct Entry{
-	Addr pc;
-	Addr last_address;
-	Addr last_prefetch;
-	Delta deltas[NUM_DELTAS];
-	int  delta_pointer;
-
-	//Constructor
-	Entry(Addr pc = 0, Addr addr = 0){
-		this->pc = pc;
-		this->last_address  = addr;
-		this->last_prefetch = 0;
-
-		for(int i = 0; i < NUM_DELTAS; ++i){
-			this->deltas[i] = 0;
-		}
-
-		this->delta_pointer = 0;
-	}
-
-	//Construct function (object function)
-	void insert_delta(Delta delta){
-		this->deltas[this->delta_pointer] = delta;
-		this->delta_pointer = (this->delta_pointer + 1) % NUM_DELTAS;
-	}
-};
-
-//The global table holding all of the Entry rows for the DCPT implementation.
-Entry table[TABLE_SIZE];
-
-//wtf does this function do?
-Entry &table_lookup(Addr pc){
-	// Direct mapping. Could use other strategy like 2-way associative.
-	return table[pc % TABLE_SIZE];
+    DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
 }
 
-//wtf is it this one is supposed to do?
-std::vector<Addr> delta_correlation(const Entry &entry){
-    std::vector<Addr> candidates;
+void prefetch_access(AccessStat stat)
+{
+    /* pf_addr is now an address within the _next_ cache block */
+    Addr pf_addr = stat.mem_addr + BLOCK_SIZE;
 
-    Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS]; 
-    Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS]; 
-
-    Addr address = entry.last_address;
-
-    for(/* each pair u, v in entry.deltas */)
-    {
-        if(entry.deltas[i] == d1 && entry.deltas[j] == d2)
-        {
-            for(/* each delta remaining in entry.deltas */)
-            {
-                address += delta;
-                candidates.push_back(address);
-            }
-        }
+    /*
+     * Issue a prefetch request if a demand miss occured,
+     * and the block is not already in cache.
+     */
+    if (stat.miss && !in_cache(pf_addr)) {
+        issue_prefetch(pf_addr);
     }
-
-    return candidates;
-}
-
-//Filter what?
-std::vector<Addr> prefetch_filter(const Entry &entry, const std::vector<Addr> &candidates){
-	// TODO: implement
-	return candidates;
-}
-
-//Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
-//(Or so I assume?)
-void issue_prefetches(const std::vector<Addr> &prefetches){
-    std::for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
+	//If prefetched data is accessed, prefetch the next 5 blocks
+	else if (!stat.miss && in_cache(pf_addr) && get_prefetch_bit(pf_addr)){
+		for (int i = 1; i < 6; i++){
+			if (!in_cache(pf_addr + BLOCK_SIZE * i))
+				issue_prefetch(pf_addr + BLOCK_SIZE * i);
+		}
+	}
 }
 
 void prefetch_complete(Addr addr) {
-	/*
-	 * Called when a block requested by the prefetcher has been loaded.
-	 */
+	set_prefetch_bit(addr);
 }
-
-void prefetch_init(void){
-	/* Called before any calls to prefetch_access. */
-	/* This is the place to initialize data structures. */
-
-	DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
-}
-
-void prefetch_access(AccessStat stat){
-	Addr pc   = stat.pc;
-	Addr addr = stat.mem_addr;
-
-	Entry &entry = table_lookup(pc);
-
-	if(entry.pc != pc){
-		entry = Entry(pc, addr);
-	}
-	else if(stat.mem_addr != entry.last_address){
-		entry.insert_delta(addr - entry.last_address);
-		entry.last_address = addr;
-
-		std::vector<Addr> candidates = delta_correlation(entry);
-		std::vector<Addr> prefetches = prefetch_filter(entry, candidates);
-		issue_prefetches(prefetches);
-	}
-}
-
-void prefetch_complete(Addr addr){
-	/*
-	 * Called when a block requested by the prefetcher has been loaded.
-	 */
-}
-
