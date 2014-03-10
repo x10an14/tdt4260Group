@@ -21,9 +21,7 @@
 % make the title area
 \maketitle
 
-\begin{abstract}
-The abstract goes here.
-\end{abstract}
+\input{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
@@ -32,24 +30,19 @@ DCPT, Prefetcher, NTNU, Computer Architecture.
 \IEEEpeerreviewmaketitle
 
 
-\section{Introduction}
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8 and later. I wish you the best of success.
+\input{introduction}
 
-\hfill March 27, 2014
+\input{background}
 
+\input{prefetcher_description}
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\input{methodology}
 
+\input{results}
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\input{discussion}
 
-
-\section{Conclusion}
-The conclusion goes here.......................
+\input{conclusion}
 
 
 \appendices
