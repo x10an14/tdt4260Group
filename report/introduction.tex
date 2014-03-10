@@ -1,19 +1,14 @@
 \section{Introduction}
+\IEEEPARstart{A}{n} increasing challenge in creating the computers of tomorrow is called the "memory wall". This states that processor performance increases much faster than the delay for accessing memory is decreasing. One method for reducing this gap is called prefetching. The idea is to have a predictive module moving instructions/data from the slow main memory to the much faster cache \emph{before} it is actually needed. When the processor then demands the instruction/data, it is already in the cache and can be used right away.
 
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8 and later. I wish you the best of success.
+\subsection*{}
+The purpose of this project has been to develop and evaluate a prefetcher using the M5 simulator, utilizing maximum 8KB of prefetching memory. We decided to implement a prefetcher with Delta Correlating Prediction Table (DCPT), as this design has proved to be very effective (reference), and it seemed reasonable that we would be able to implement it with the given constraint. The implementation is done according to the algorithm presented in "Storage Efficient Hardware Prefetching using Delta Correlation Prediction Tables” by Marius Grannaes, Magnus Jahre and Lasse Natvig. The storage limitation makes it important to examine how the 8 KB can be used most efficiently. Possible physical implementation will be discussed(?).
+
 
 \hfill March 27, 2014
 
-
-\subsection{Subsection Heading Here}
-Subsection text here.
-
-
-\subsubsection{About the introduction:}
+\subsection{About the introduction:}
 - Introduces the larger research area that the paper is 
 a part of\\
 - Introduces the problem at hand\\
 - Explains the scheme\\
-- Level of abstraction: “20 000 feet”\\
