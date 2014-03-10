@@ -28,8 +28,8 @@ void prefetch_access(AccessStat stat)
         issue_prefetch(pf_addr);
     }
     //If prefetched data is accessed, prefetch the next block
-    else if (!stat.miss && get_prefetch_bit(stat.mem_addr) && !in_cache(pf_addr)){
-	issue_prefetch(pf_addr);
+    else if (!stat.miss && get_prefetch_bit(stat.mem_adr) && !in_cache(pf_addr)){
+	   issue_prefetch(pf_addr);
     }
 }
 
