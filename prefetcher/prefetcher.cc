@@ -27,13 +27,10 @@ void prefetch_access(AccessStat stat)
     if (stat.miss && !in_cache(pf_addr)) {
         issue_prefetch(pf_addr);
     }
-	//If prefetched data is accessed, prefetch the next 5 blocks
-	else if (!stat.miss && in_cache(pf_addr) && get_prefetch_bit(pf_addr)){
-		for (int i = 1; i < 6; i++){
-			if (!in_cache(pf_addr + BLOCK_SIZE * i))
-				issue_prefetch(pf_addr + BLOCK_SIZE * i);
-		}
-	}
+    //If prefetched data is accessed, prefetch the next block
+    else if (!stat.miss && get_prefetch_bit(stat.mem_adr) && !in_cache(pf_addr)){
+	issue_prefetch(pf_addr);
+    }
 }
 
 void prefetch_complete(Addr addr) {
