@@ -5,7 +5,13 @@
  */
 
 #include "interface.hh"
+#ifndef DEGREE
+#define DEGREE 5
+#endif
 
+#ifndef DISTANCE
+#define DISTANCE 5
+#endif
 
 void prefetch_init(void)
 {
@@ -17,7 +23,7 @@ void prefetch_init(void)
 
 //prefetching with degree and distance.
 
-void prefetch_several(unsigned int degree, unsigned int distance, Addr address)
+void prefetch_several(Addr address)
 {
     for (unsigned int i = 0; i < degree; i++){
         Addr pf_addr = address + BLOCK_SIZE * (degree + distance);
@@ -39,11 +45,11 @@ void prefetch_access(AccessStat stat)
     //degree = 5, distance = 4. Dette nevnes som en konfigurasjon i Marius Grannaes sin paper.
     //Vet ikke helt om jeg har tolket distance-parameteren riktig da.
     if (stat.miss) {
-        prefetch_several(5, 4, stat.mem_addr);
+        prefetch_several(stat.mem_addr);
     }
     //If prefetched data is accessed, prefetch the next block
     else if (!stat.miss && get_prefetch_bit(stat.mem_addr)){
-	   prefetch_several(5, 4, stat.mem_addr);
+	   prefetch_several(stat.mem_addr);
     }
 }
 
