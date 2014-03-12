@@ -82,8 +82,10 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 	vector<Addr> prefetches;
 	for (vector<Addr>::const_iterator i = candidates.begin(); i != candidates.end(); ++i){
 		if(in_flight.find(*i) == in_flight.end() && !in_mshr_queue(*i) && !in_cache(*i)){
-			prefetches.push_back(*i);
-			in_flight.insert(*i);
+            if(in_flight.size() < MAX_QUEUE_SIZE) {
+                prefetches.push_back(*i);
+                in_flight.insert(*i);
+            }
 		}
 		if(*i == entry.last_prefetch){
 			prefetches.clear();
