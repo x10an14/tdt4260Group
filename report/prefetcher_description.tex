@@ -1,5 +1,5 @@
 \section{Prefetcher Description}
-The prefetcher description goes here.
+The prefetcher description goes here. Another section title maybe?
 \\
 - Explain your scheme in detail\\
 - Choose an informative title\\
@@ -7,3 +7,11 @@ The prefetcher description goes here.
 your scheme\\
 - If your scheme is complex, an informative example 
 may be in order\\
+
+\subsection{Delta Correlating Prediction Table}
+
+\subsection{Tagged Sequential}
+The tagged sequential prefetcher is a slight improvement over the sequential prefetcher. Preceeding (etterfølgende?) blocks are prefetched to the cache when there has been a cache miss, or when a previously prefetched cache entry has been accessed. The prefetching degree determines how many blocks should be prefetched at a time, and the distance specifies how many blocks away from the currently accessed block the prefetches should be done. (Vet ikke om dette med distance stemmer helt..) Our tagged sequential prefetcher was implemented with (..........) 
+
+\subsubsection{Hardware requirements}
+With the given implementation, a tagged sequential prefetcher simply requires one bit per cache word in order to store the associated tag. With an L2 cache size of 1 MB and 64 bit word size, there are 128 different words in the cache, meaning 128 bits of storage is required for the tagged prefetcher.
