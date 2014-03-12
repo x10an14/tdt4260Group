@@ -76,16 +76,16 @@ vector<Addr> delta_correlation(const Entry &entry){
 
 vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates){
 	vector<Addr> prefetches;
-	for (vector<candidates>::iterator i = candidates.begin(); i != candidates.end(); ++i){
-		if(inFlight.find(i) == inFlight.end() && in_mshr_queue(i) == 1 && in_cache(i) == 1){
-			prefetches.push_back(i);
-			inFlight.insert(i);
+	for (vector<Addr>::const_iterator i = candidates.begin(); i != candidates.end(); ++i){
+		if(in_flight.find(*i) == in_flight.end() && !in_mshr_queue(*i) && !in_cache(*i)){
+			prefetches.push_back(*i);
+			in_flight.insert(*i);
 		}
-		if(i == entry.last_prefetch){
-			prefetches == NULL;
+		if(*i == entry.last_prefetch){
+			prefetches.clear();
 		}
 	}
-	return candidates;
+	return prefetches;
 }
 
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
