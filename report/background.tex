@@ -1,24 +1,31 @@
 \section{Background}
 
 \subsection*{DCPT}
-Beskrivelse av DCPT.
+\todo[inline]{Beskrivelse av DCPT.}
 
-\subsection*{}
-The size of the prefetcher has been a limitation in our development. Hardware components must usually be designed within an area budget, and in order to make the prefetcher somewhat realistic for a hardware implementation the limit was set to maximum 8 KB of storage. (Må redgjøre for at vi ikke overskrider denne et sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track of the deltas, and so organizing the memory effectively is an important aspect. In the original implementation (reference), only 4 KB of storage is used.
+The size of the prefetcher has been a limitation in our development. Hardware
+components must usually be designed within an area budget, and in order to make
+the prefetcher somewhat realistic for a hardware implementation the limit was
+set to maximum 8 KB of storage. (Må redgjøre for at vi ikke overskrider denne et
+sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track
+of the deltas, and so organizing the memory effectively is an important aspect.
+In the original implementation (reference), only 4 KB of storage is used.
 
 \subsection*{Tagged Sequential Prefetching}
-The tagged sequential prefetcher a simple prefetching method, slightly improving the performance of a sequential prefetcher (reference). As with sequential prefetching the spatial locality of data is exploited.
 
-\textbf{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
+The tagged sequential prefetcher a simple prefetching method, slightly improving
+the performance of a sequential prefetcher (reference). As with sequential
+prefetching the spatial locality of data is exploited.
 
-\subsection*{}
-Related Work\\
-- Reference the work that other researchers have done 
+\todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
+
+\todo[inline]{Related Work\\
+- Reference the work that other researchers have done
 that is related to your scheme\\
 - Should be complete (i.e. contain all relevant work)\\
 - Remember: you define the scope of your work\\
-Can be split into two sections: Background and Related 
+Can be split into two sections: Background and Related
 Work\\
 - Background is an informative introduction to the field (often section 2)\\
-- Related work is a very dense section that includes all relevant 
-references (often section n-1)\\
+- Related work is a very dense section that includes all relevant
+references (often section n-1)\\}
