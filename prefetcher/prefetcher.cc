@@ -54,18 +54,22 @@ Entry &table_lookup(Addr pc){
 vector<Addr> delta_correlation(const Entry &entry){
 	vector<Addr> candidates;
 
-	Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS];
-	Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS];
+    if(entry.deltas.size() < 2) {
+        return candidates;
+    }
 
+    deque<Delta>::const_reverse_iterator u, v;
+    u = entry.deltas.rbegin();
+    v = u; ++v;
+
+    Delta d1 = *u, d2 = *v;
 	Addr address = entry.last_address;
 
-	for(/* each pair u, v in entry.deltas */)
-	{
-		if(entry.deltas[i] == d1 && entry.deltas[j] == d2)
-		{
-			for(/* each delta remaining in entry.deltas */)
-			{
-				address += delta;
+	for(; v != entry.deltas.rend(); ++u, ++v) {
+		if(*u == d1 && *v == d2) {
+            deque<Delta>::const_reverse_iterator w = v;
+			for(++w; w != entry.deltas.rend(); ++w) {
+				address += *w;
 				candidates.push_back(address);
 			}
 		}
@@ -76,16 +80,16 @@ vector<Addr> delta_correlation(const Entry &entry){
 
 vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates){
 	vector<Addr> prefetches;
-	for (vector<candidates>::iterator i = candidates.begin(); i != candidates.end(); ++i){
-		if(inFlight.find(i) == inFlight.end() && in_mshr_queue(i) == 1 && in_cache(i) == 1){
-			prefetches.push_back(i);
-			inFlight.insert(i);
+	for (vector<Addr>::const_iterator i = candidates.begin(); i != candidates.end(); ++i){
+		if(in_flight.find(*i) == in_flight.end() && !in_mshr_queue(*i) && !in_cache(*i)){
+			prefetches.push_back(*i);
+			in_flight.insert(*i);
 		}
-		if(i == entry.last_prefetch){
-			prefetches == NULL;
+		if(*i == entry.last_prefetch){
+			prefetches.clear();
 		}
 	}
-	return candidates;
+	return prefetches;
 }
 
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
