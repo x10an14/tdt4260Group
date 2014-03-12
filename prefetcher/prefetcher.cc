@@ -54,18 +54,22 @@ Entry &table_lookup(Addr pc){
 vector<Addr> delta_correlation(const Entry &entry){
 	vector<Addr> candidates;
 
-	Delta d1 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 1) % NUM_DELTAS];
-	Delta d2 = entry.deltas[(this->delta_pointer + NUM_DELTAS - 2) % NUM_DELTAS];
+    if(entry.deltas.size() < 2) {
+        return candidates;
+    }
 
+    deque<Delta>::const_reverse_iterator u, v;
+    u = entry.deltas.rbegin();
+    v = u; ++v;
+
+    Delta d1 = *u, d2 = *v;
 	Addr address = entry.last_address;
 
-	for(/* each pair u, v in entry.deltas */)
-	{
-		if(entry.deltas[i] == d1 && entry.deltas[j] == d2)
-		{
-			for(/* each delta remaining in entry.deltas */)
-			{
-				address += delta;
+	for(; v != entry.deltas.rend(); ++u, ++v) {
+		if(*u == d1 && *v == d2) {
+            deque<Delta>::const_reverse_iterator w = v;
+			for(++w; w != entry.deltas.rend(); ++w) {
+				address += *w;
 				candidates.push_back(address);
 			}
 		}
