@@ -6,15 +6,15 @@
 The size of the prefetcher has been a limitation in our development. Hardware
 components must usually be designed within an area budget, and in order to make
 the prefetcher somewhat realistic for a hardware implementation the limit was
-set to maximum 8 KB of storage. (Må redgjøre for at vi ikke overskrider denne et
+set to maximum 8 KB of storage \cite{guidelines}. (Må redgjøre for at vi ikke overskrider denne et
 sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track
 of the deltas, and so organizing the memory effectively is an important aspect.
-In the original implementation (reference), only 4 KB of storage is used.
+In the original implementation, only 4 KB of storage is used \cite{dcpt}.
 
 \subsection*{Tagged Sequential Prefetching}
 
 The tagged sequential prefetcher a simple prefetching method, slightly improving
-the performance of a sequential prefetcher (reference). As with sequential
+the performance of a sequential prefetcher \cite{grannaes}. As with sequential
 prefetching the spatial locality of data is exploited.
 
 \todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
