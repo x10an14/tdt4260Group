@@ -13,9 +13,14 @@ In the original implementation, only 4 KB of storage is used \cite{dcpt}.
 
 \subsection*{Tagged Sequential Prefetching}
 
-The tagged sequential prefetcher a simple prefetching method, slightly improving
-the performance of a sequential prefetcher \cite{grannaes}. As with sequential
-prefetching the spatial locality of data is exploited.
+The tagged sequential prefetcher is a slight improvement over the sequential
+prefetcher. As with sequential prefetching the spatial locality 
+of data is exploited. Additionally, a tagging system is used to mark the cache 
+blocks that have been prefetced. This is used to be able to recognize when a 
+prefetched cache block is actually accessed by the application, which implies 
+that there has been a successful prefetch. Subsequent blocks are prefetched 
+to the cache when there has been a cache miss, or when a previously prefetched 
+cache entry has been accessed.\cite{grannaes}
 
 \todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
 

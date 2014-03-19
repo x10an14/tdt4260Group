@@ -13,14 +13,13 @@ may be in order\\}
 
 \subsection{Tagged Sequential}
 
-The tagged sequential prefetcher is a slight improvement over the sequential
-prefetcher. Preceeding (etterfølgende?) blocks are prefetched to the cache when
-there has been a cache miss, or when a previously prefetched cache entry has
-been accessed. \todo{Vet ikke om dette med distance stemmer helt..) Our tagged
-sequential prefetcher was implemented with (..........)}The prefetching degree
+The tagged sequential prefetcher 
+can be configured by adjusting the \emph{degree} and \emph{distance}. The degree
 determines how many blocks should be prefetched at a time, and the distance
 specifies how many blocks away from the currently accessed block the prefetches
-should be done.
+should be done. Our prefetcher was simulated with different combinations of 
+degree and distance, in the range of 0-6. The combination that got the best 
+overall score on the benchmark tests was with degree 5 and distance 4.
 
 \subsubsection{Hardware requirements}
 

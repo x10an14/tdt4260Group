@@ -1,4 +1,15 @@
 \section{Results}
+
+\subsection{Tagged sequential}
+As described previously, the tagged sequential prefetcher was 
+implemented with degree 5 and distance 4, as the performance 
+with this configuration proved to be relatively good. The 
+resulting average speedup was 1.032. The "ammp" and "twolf" benchmarks gave 
+really bad results, with a speedup of respectively 0.759 and 0.983 
+(speedup below zero means the prefetcher actually slows down the application). This is
+expected as those applications use large objects and irregular cache alignment, 
+which makes it very challenging to predict future memory accesses using spatial locality.
+
 \todo[inline]{The results goes here.
 \\
 - Show that your scheme works\\
