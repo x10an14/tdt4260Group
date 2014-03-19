@@ -3,6 +3,8 @@
 \else
 \fi
 
+\usepackage{todonotes}
+
 \hyphenation{op-tical net-works semi-conduc-tor}
 \begin{document}
 \title{SAWT - Super Awesome Working Title}
@@ -54,22 +56,9 @@ Appendix one text goes here.
 \section{}
 Appendix two text goes here.
 
-
-% use section* for acknowledgement
-\section*{Acknowledgment}
-
-The authors would like to thank...
-
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
 
-\begin{thebibliography}{1}
-
-\bibitem{IEEEhowto:kopka}
-H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-
-\end{thebibliography}
+\input{bibliography}
 \end{document}

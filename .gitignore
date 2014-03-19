@@ -16,10 +16,14 @@
 # Sublime ignore
 *.sublime*
 
+# Ingebrigt editor ignore
+*~
+
 #LaTeX files
 *.aux
 *.log
 *.pdf
+*.synctex.gz
 
 #IEEEtran archive/folder
 IEEEtran.tar
