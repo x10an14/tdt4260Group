@@ -10,23 +10,19 @@
 #endif
 
 #ifndef DISTANCE
-#define DISTANCE 5
+#define DISTANCE 3
 #endif
 
 void prefetch_init(void)
 {
-    /* Called before any calls to prefetch_access. */
-    /* This is the place to initialize data structures. */
-
     DPRINTF(HWPrefetch, "Initialized sequential-on-access prefetcher\n");
 }
 
-//prefetching with degree and distance.
-
+//prefetching with DEGREE and DISTANCE.
 void prefetch_several(Addr address)
 {
-    for (unsigned int i = 0; i < degree; i++){
-        Addr pf_addr = address + BLOCK_SIZE * (degree + distance);
+    for (unsigned int i = 0; i < DEGREE; i++){
+        Addr pf_addr = address + BLOCK_SIZE * (DEGREE + DISTANCE);
         if (!in_cache(pf_addr))
             issue_prefetch(pf_addr);
     }
@@ -42,8 +38,8 @@ void prefetch_access(AccessStat stat)
      * and the block is not already in cache.
      */
 
-    //degree = 5, distance = 4. Dette nevnes som en konfigurasjon i Marius Grannaes sin paper.
-    //Vet ikke helt om jeg har tolket distance-parameteren riktig da.
+    //DEGREE = 5, DISTANCE = 4. Dette nevnes som en konfigurasjon i Marius Grannaes sin paper.
+    //Vet ikke helt om jeg har tolket DISTANCE-parameteren riktig da.
     if (stat.miss) {
         prefetch_several(stat.mem_addr);
     }
