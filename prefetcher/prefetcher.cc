@@ -10,9 +10,20 @@
 #include <vector>
 #include "interface.hh"
 
-// TODO: I just chose these constants somewhat arbitrarily. Should choose these more carefully.
-#define NUM_DELTAS 8
-#define TABLE_SIZE 128
+// We have 8KiB for the entry table. Each entry is 3 * 64 bits for the address
+// fields, plus NUM_DELTAS * DELTA_BITS bits for the deltas themselves.
+//
+// Example configuration: 8 deltas, each 8 bits = 4 * 64 bits per entry = 32 byte
+// per entry. 8192 / 32 = room for 256 entries in the table. However, in hardware
+// we would not store the final 8 bits of the PC, as they are implicit from the
+// position in the table. These extra 8 bits have been used to store one more
+// delta per entry.
+#define NUM_DELTAS 9
+#define TABLE_SIZE 256
+#define DELTA_BITS 8
+
+#define DELTA_MIN (- (1 << (DELTA_BITS - 1)))
+#define DELTA_MAX ((1 << (DELTA_BITS - 1)) - 1)
 
  using namespace std;
 
@@ -34,6 +45,11 @@ struct Entry{
 
 	//Construct function (object function)
 	void insert_delta(Delta delta){
+        // Ignore deltas too large or too negative to store.
+        if(delta < DELTA_MIN || delta > DELTA_MAX) {
+            return; 
+        }
+
 		deltas.push_back(delta);
 		if(deltas.size() > NUM_DELTAS)
 			deltas.pop_front();
