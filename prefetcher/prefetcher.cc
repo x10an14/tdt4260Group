@@ -65,10 +65,10 @@ vector<Addr> delta_correlation(const Entry &entry){
     Delta d1 = *u, d2 = *v;
 	Addr address = entry.last_address;
 
-	for(; v != entry.deltas.rend(); ++u, ++v) {
+	for(++u, ++v; v != entry.deltas.rend(); ++u, ++v) {
 		if(*u == d1 && *v == d2) {
             deque<Delta>::const_reverse_iterator w = v;
-			for(++w; w != entry.deltas.rend(); ++w) {
+			for(; w != entry.deltas.rend(); ++w) {
 				address += *w;
 				candidates.push_back(address);
 			}
