@@ -60,6 +60,12 @@ struct Entry{
 Entry table[TABLE_SIZE];
 set<Addr> in_flight;
 
+// Round addresses to multiple of the block size so that we can recognize
+// addresses within the same block in the in_flight array.
+Addr to_block(Addr addr) {
+    return (addr / BLOCK_SIZE) * BLOCK_SIZE;
+}
+
 //wtf does this function do?
 Entry &table_lookup(Addr pc){
 	// Direct mapping. Could use other strategy like 2-way associative.
@@ -97,10 +103,10 @@ vector<Addr> delta_correlation(const Entry &entry){
 vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates){
 	vector<Addr> prefetches;
 	for (vector<Addr>::const_iterator i = candidates.begin(); i != candidates.end(); ++i){
-		if(in_flight.find(*i) == in_flight.end() && !in_mshr_queue(*i) && !in_cache(*i)){
+		if(in_flight.find(to_block(*i)) == in_flight.end() && !in_mshr_queue(*i) && !in_cache(*i)){
             if(in_flight.size() < MAX_QUEUE_SIZE) {
                 prefetches.push_back(*i);
-                in_flight.insert(*i);
+                in_flight.insert(to_block(*i));
             }
 		}
 		if(*i == entry.last_prefetch){
@@ -113,15 +119,19 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
 void issue_prefetches(const vector<Addr> &prefetches){
-	for_each(prefetches.begin(), prefetches.end(), issue_prefetch);
-	//in_flight.insert(prefetches.begin(), prefetches.end());
+    for(vector<Addr>::const_iterator i = prefetches.begin(); i != prefetches.end(); ++i) {
+        if(current_queue_size() >= MAX_QUEUE_SIZE)
+            break;
+
+        issue_prefetch(*i);
+    }
 }
 
 void prefetch_complete(Addr addr) {
 	/*
 	 * Called when a block requested by the prefetcher has been loaded.
 	 */
-	in_flight.erase(addr);
+	in_flight.erase(to_block(addr));
 }
 
 void prefetch_init(void){
