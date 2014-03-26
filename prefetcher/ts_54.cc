@@ -22,7 +22,7 @@ void prefetch_init(void)
 void prefetch_several(Addr address)
 {
     for (unsigned int i = 0; i < DEGREE; i++){
-        Addr pf_addr = address + BLOCK_SIZE * (DEGREE + DISTANCE);
+        Addr pf_addr = address + BLOCK_SIZE * (i + DISTANCE);
         if (!in_cache(pf_addr))
             issue_prefetch(pf_addr);
     }
@@ -30,21 +30,11 @@ void prefetch_several(Addr address)
 
 void prefetch_access(AccessStat stat)
 {
-    /* pf_addr is now an address within the _next_ cache block */
     Addr pf_addr = stat.mem_addr + BLOCK_SIZE;
-
-    /*
-     * Issue a prefetch request if a demand miss occured,
-     * and the block is not already in cache.
-     */
-
-    //DEGREE = 5, DISTANCE = 4. Dette nevnes som en konfigurasjon i Marius Grannaes sin paper.
-    //Vet ikke helt om jeg har tolket DISTANCE-parameteren riktig da.
     if (stat.miss) {
         prefetch_several(stat.mem_addr);
     }
-    //If prefetched data is accessed, prefetch the next block
-    else if (!stat.miss && get_prefetch_bit(stat.mem_addr)){
+    else if (get_prefetch_bit(stat.mem_addr)){
 	   prefetch_several(stat.mem_addr);
     }
 }
