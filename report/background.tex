@@ -1,5 +1,16 @@
 \section{Background}
 
+\subsection*{Tagged Sequential Prefetching}
+
+The tagged sequential prefetcher is a slight improvement over the sequential
+prefetcher. As with sequential prefetching the spatial locality 
+of data is exploited. Additionally, a tagging system is used to mark the cache 
+blocks that have been prefetced. This is used to be able to recognize when a 
+prefetched cache block is actually accessed by the application, which implies 
+that there has been a successful prefetch. Subsequent blocks are prefetched 
+to the cache when there has been a cache miss, or when a previously prefetched 
+cache entry has been accessed.\cite{grannaes}
+
 \subsection*{DCPT}
 \todo[inline]{Beskrivelse av DCPT.}
 
@@ -11,16 +22,6 @@ sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track
 of the deltas, and so organizing the memory effectively is an important aspect.
 In the original implementation, only 4 KB of storage is used \cite{dcpt}.
 
-\subsection*{Tagged Sequential Prefetching}
-
-The tagged sequential prefetcher is a slight improvement over the sequential
-prefetcher. As with sequential prefetching the spatial locality 
-of data is exploited. Additionally, a tagging system is used to mark the cache 
-blocks that have been prefetced. This is used to be able to recognize when a 
-prefetched cache block is actually accessed by the application, which implies 
-that there has been a successful prefetch. Subsequent blocks are prefetched 
-to the cache when there has been a cache miss, or when a previously prefetched 
-cache entry has been accessed.\cite{grannaes}
 
 \todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
 
