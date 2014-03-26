@@ -1,0 +1,33 @@
+\section{The Scheme}
+
+\todo[inline]{Our prefetcher implementation goes here. Rename the title to ``Our implementation''?\\
+- Explain your scheme in detail\\
+- Choose an informative title\\
+- Trick: Add an informative figure that helps explain
+your scheme\\
+- If your scheme is complex, an informative example
+may be in order\\}
+
+\subsection{Delta Correlating Prediction Table}
+
+\subsection{Tagged Sequential}
+
+The tagged sequential prefetcher can be configured by adjusting the
+\emph{degree} and \emph{distance}. The distance is how many blocks ahead of the
+currently accessed block the prefetcher will fetch, and the degree is how many
+consequtive blocks at this location in memory are fetched.
+\todo[inline]{Andreas: Confirm phrasing of above sentence. Edit/delete sentence/todonote.}
+
+Our prefetcher was simulated with different combinations of degree and distance,
+in the range of 0--6. The combination that got the best overall score on the
+benchmark tests was with degree 5 and distance 4.
+
+\subsubsection{Hardware requirements}
+
+With the given implementation, a tagged sequential prefetcher simply requires
+one bit per cache word in order to store the associated tag. With an L2 cache
+size of 1 MB and 64 bit word size, there are 128 different words in the cache,
+meaning 128 bits of storage is required for the tagged prefetcher.
+
+\todo[inline]{Calculate \% overhead, give the reader an idea of how much 1 MB,
+128 bits are in comparison with the limitations.}

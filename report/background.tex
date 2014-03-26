@@ -1,6 +1,6 @@
 \section{Background}
 
-\subsection*{Tagged Sequential Prefetching Algorithm}
+\subsection{Tagged Sequential Prefetching Algorithm}
 
 The tagged sequential prefetcher is a slight improvement over the sequential
 prefetcher. As with sequential prefetching the spatial locality of data is
@@ -9,9 +9,9 @@ have been prefetced. This is used to be able to recognize when a prefetched
 cache block is actually accessed by the application, which implies that there
 has been a successful prefetch. Subsequent blocks are prefetched to the cache
 when there has been a cache miss, or when a previously prefetched cache entry
-has been accessed\cite{grannaes}.
+has been accessed~\cite{grannaes}.
 
-\subsection*{Delta Correlating Prefetching Table Algorithm}
+\subsection{Delta Correlating Prefetching Table Algorithm}
 
 DCPT is a more advanced method. It is an instruction-based prefetcher using a
 table indexed by the address of the instruction which tried to access memory.
@@ -38,7 +38,7 @@ rapporten?}
 
 The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
 so organizing the memory effectively is an important aspect. In the original
-implementation, only 4KiB of storage are used \cite{dcpt}.
+implementation, only 4KiB of storage are used~\cite{dcpt}.
 
 
 \todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
