@@ -2,14 +2,15 @@
 
 \subsection{Tagged Sequential Prefetching Algorithm}
 
-The tagged sequential prefetcher is a slight improvement over the sequential
-prefetcher. As with sequential prefetching the spatial locality of data is
-exploited. Additionally, a tagging system is used to mark the cache blocks that
-have been prefetced. This is used to be able to recognize when a prefetched
-cache block is actually accessed by the application, which implies that there
-has been a successful prefetch. Subsequent blocks are prefetched to the cache
-when there has been a cache miss, or when a previously prefetched cache entry
-has been accessed~\cite{grannaes}.
+The simplest prefetcher is the sequential prefetcher, which simply fetches the
+next block of data \citep{seq}. The tagged sequential prefetcher is a slight
+improvement over the sequential prefetcher. As with sequential prefetching the
+spatial locality of data is exploited. Additionally, a tagging system is used to
+mark the cache blocks that have been prefetced. This is used to be able to
+recognize when a prefetched cache block is actually accessed by the application,
+which implies that there has been a successful prefetch. Subsequent blocks are
+prefetched to the cache when there has been a cache miss, or when a previously
+prefetched cache entry has been accessed~\cite{grannaes}.
 
 \subsection{Delta Correlating Prefetching Table Algorithm}
 
