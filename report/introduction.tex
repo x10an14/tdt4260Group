@@ -1,27 +1,30 @@
 \section{Introduction}
 
-\IEEEPARstart{A}{n} increasing challenge in creating the computers of tomorrow
-is called the ``memory wall''. This states that processor performance increases
-much faster than the delay for accessing memory is decreasing. One method for
-reducing this gap is called prefetching. The idea is to have a predictive module
-moving  instructions/data from the slow main memory to the much faster cache
-\emph{before} it is actually needed. When the processor then demands the
-instruction/data, it is already in the cache and can be used right away.
+\IEEEPARstart{T}{he} ``memory wall'' is becoming an increasing challenge for the
+computers of tomorrow. This ``memory wall'' is when the on-chip computing speeds
+exceed the on-chip memory capacities, creating the situation where computing
+circuitry has to lie idle waiting for instructions/data to arrive from off-chip
+locations and be put into the on-chip cache. The cache is the fastest, most
+expensive, and most sparingly used memory resource in a computer, more often
+than not residing as closely on-chip as possible to the \emph{central processing
+unit} (CPU). One method for reducing this gap is called \emph{prefetching}.
 
+The idea behind prefecthing is to have a predictive module moving
+instructions/data from the slower off-chip memory (like main memory) to the much
+faster cache \emph{before} it is needed. Hence, when the processor then requires
+the instruction/data, it is already in the cache and can be made use of within
+an amount of on-chip clock cycles, not having to wait for the slower off-chip
+clock cycles dominated by the time it takes for one or more chips to communicate
+(like on a bus).
 
-The purpose of this project has been to develop and evaluate a prefetcher using
-the M5 simulator, utilizing maximum 8KB of prefetching memory. We decided to
-implement a prefetcher with Delta Correlating Prediction Table (DCPT), as this
-design has proved to be very effective (reference), and it seemed reasonable
-that we would be able to implement it with the given constraint. The
-implementation is done according to the algorithm presented in "Storage
-Efficient Hardware Prefetching using Delta Correlation Prediction Tables” by
-Marius Grannaes, Magnus Jahre and Lasse Natvig \cite{dcpt}. The storage limitation makes it
-important to examine how the 8 KB can be used most efficiently. Possible
-physical implementation will be discussed(?).
-
-
-\hfill \today
+The purpose of this report is to develop and evaluate a prefetcher using the M5
+simulator, with a prefetcher utilizing maximum 8KiB. We implement a DCPT
+prefetcher, as this design proves to be very effective. The prefetcher is
+implemented according to the algorithm presented in ``Storage Efficient Hardware
+Prefetching using Delta Correlation Prediction Tables'' by Grannaes, Jahre, and
+Natvig~\cite{dcpt}. The storage limitation makes it important to examine how the
+8 KiB can be used most efficiently. \todo[inline]{Possible physical implementation will be
+discussed(?).}
 
 \todo[inline]{About the introduction:
 - Introduces the larger research area that the paper is
