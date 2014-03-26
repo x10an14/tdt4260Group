@@ -1,16 +1,5 @@
 \section{Background}
 
-\subsection*{DCPT}
-\todo[inline]{Beskrivelse av DCPT.}
-
-The size of the prefetcher has been a limitation in our development. Hardware
-components must usually be designed within an area budget, and in order to make
-the prefetcher somewhat realistic for a hardware implementation the limit was
-set to maximum 8 KB of storage \cite{guidelines}. (Må redgjøre for at vi ikke overskrider denne et
-sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track
-of the deltas, and so organizing the memory effectively is an important aspect.
-In the original implementation, only 4 KB of storage is used \cite{dcpt}.
-
 \subsection*{Tagged Sequential Prefetching}
 
 The tagged sequential prefetcher is a slight improvement over the sequential
@@ -21,6 +10,32 @@ prefetched cache block is actually accessed by the application, which implies
 that there has been a successful prefetch. Subsequent blocks are prefetched 
 to the cache when there has been a cache miss, or when a previously prefetched 
 cache entry has been accessed.\cite{grannaes}
+
+\subsection*{DCPT}
+
+DCPT is a more advanced method. It is an instruction-based prefetcher using a
+table indexed by the address of the instruction which tried to access memory.
+Each entry contains a ring buffer of the most recent deltas between successive
+addresses accessed by this instruction. When an access happens, the prefetcher
+examines the two most recent deltas and searches the ring buffer for patterns
+beginning with these two deltas. If there are multiple matches, we choose the
+longest match.
+
+The prefetcher then adds the found delta pattern to the current address to obtain
+the predicted stream of future accesses. It then discards addresses which are
+already in the cache, or ones that are already being prefetched. It then issues
+prefetch commands for the remaining addresses.
+
+\todo[inline]{Størrelse og andre parametre bør heller være i metodologi-delen.}
+
+The size of the prefetcher has been a limitation in our development. Hardware
+components must usually be designed within an area budget, and in order to make
+the prefetcher somewhat realistic for a hardware implementation the limit was
+set to maximum 8 KB of storage \cite{guidelines}. (Må redgjøre for at vi ikke overskrider denne et
+sted i rapporten?) The DCPT utilizes a table of ring buffers for keeping track
+of the deltas, and so organizing the memory effectively is an important aspect.
+In the original implementation, only 4 KB of storage is used \cite{dcpt}.
+
 
 \todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
 
