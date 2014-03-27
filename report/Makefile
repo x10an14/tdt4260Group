@@ -1,6 +1,8 @@
 
 report.pdf: report.tex
 	pdflatex report.tex
+	bibtex report.aux
+	pdflatex report.tex
 	pdflatex report.tex #Two runs for references
 
 all: report.pdf

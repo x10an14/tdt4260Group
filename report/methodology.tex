@@ -4,10 +4,21 @@
 
 The M5 simulator is a popular simulator for computer architecture research, and
 it has a rich feature set \cite{user_doc}. With the given time limitations, we only utilized a
-subset of it’s complex software during our development. The interface we used is
+subset of it’s complex software during our development.
+
+\todo[inline]{Describe the interface and ``default simulator setup'' better.
+Explicitly state the conditions of the default simulator setup/the
+functions/structures in the interface.hh file. Don't simply say ``can be studied
+there.''\\
+\emph{Nico was very clear on this point...}}
+
+The interface we used is
 given in interface.hh and a short documentation of the functionality can be
 studied there. The simulation has been performed with the default simulator
-setup \todo{antar at det er det vi kommer til å gjøre}.
+setup.
+
+
+\todo[inline]{antar at det er det vi kommer til å gjøre}
 
 The simulator runs several of the SPEC CPU2000 benchmarks, so that the prefetcher
 performance can be evaluated with different applications.

@@ -6,7 +6,6 @@
 \usepackage{todonotes}
 \usepackage{datetime}
 \usepackage{listings}
-\usepackage[norsk]{babel}
 \usepackage[utf8]{inputenc}
 
 \newdateformat{curMonth}{\monthname[\THEMONTH],~\THEYEAR}
@@ -65,8 +64,10 @@ DCPT, Prefetcher, NTNU, TDT4260, 2014, Computer Architecture.
 
 \input{conclusion}
 
+\bibliography{bibliography}{}
+\bibliographystyle{plain}
 
-\appendices
+%\appendices
 %\section{Proof of the First Zonklar Equation}
 %Appendix one text goes here.
 
@@ -79,5 +80,4 @@ DCPT, Prefetcher, NTNU, TDT4260, 2014, Computer Architecture.
 %  \newpage
 %\fi
 
-\input{bibliography}
 \end{document}
