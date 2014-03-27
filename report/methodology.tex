@@ -3,8 +3,24 @@
 \subsection{M5 Simulator}
 
 The M5 simulator is a popular simulator for computer architecture research, and
-it has a rich feature set \cite{user_doc}. With the given time limitations, we only utilized a
-subset of it’s complex software during our development.
+it has a rich feature set \cite{user_doc}. With the given time limitations, we only utilized a subset of it’s complex software during our development.
+
+
+The prefetcher utilizes an interface given in the \emph{interface.hh} file. 
+\begin{table}[h]
+	\begin{tabularx}{\linewidth}{|X|c|X|}
+	\hline 
+	Variable & Value & Description \\ 
+	\hline 
+	BLOCK\_SIZE & 64 & Size of cache blocks (cache lines) in bytes \\ 
+	\hline 
+	MAX\_QUEUE\_SIZE & 100 & Maximum number of pending prefetch requests \\ 
+	\hline 
+	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\ 
+	\hline 
+	\end{tabularx} 
+\end{table}
+
 
 \todo[inline]{Describe the interface and ``default simulator setup'' better.
 Explicitly state the conditions of the default simulator setup/the
@@ -12,10 +28,8 @@ functions/structures in the interface.hh file. Don't simply say ``can be studied
 there.''\\
 \emph{Nico was very clear on this point...}}
 
-The interface we used is
-given in interface.hh and a short documentation of the functionality can be
-studied there. The simulation has been performed with the default simulator
-setup.
+
+
 
 
 \todo[inline]{antar at det er det vi kommer til å gjøre}
