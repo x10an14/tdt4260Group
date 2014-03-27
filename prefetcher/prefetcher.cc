@@ -21,6 +21,7 @@
 #define NUM_DELTAS 9
 #define TABLE_SIZE 256
 #define DELTA_BITS 8
+#define MAX_DEGREE NUM_DELTAS
 
 #define DELTA_MIN (- (1 << (DELTA_BITS - 1)))
 #define DELTA_MAX ((1 << (DELTA_BITS - 1)) - 1)
@@ -119,11 +120,13 @@ vector<Addr> prefetch_filter(const Entry &entry, const vector<Addr> &candidates)
 //Function to issue prefetch command when we have found out that we don't have the data available in top-level cache
 //(Or so I assume?)
 void issue_prefetches(const vector<Addr> &prefetches){
+    int issued_prefetches = 0;
     for(vector<Addr>::const_iterator i = prefetches.begin(); i != prefetches.end(); ++i) {
-        if(current_queue_size() >= MAX_QUEUE_SIZE)
+        if(current_queue_size() >= MAX_QUEUE_SIZE || issued_prefetches >= MAX_DEGREE)
             break;
 
         issue_prefetch(*i);
+        issued_prefetches++;
     }
 }
 
