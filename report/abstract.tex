@@ -1,13 +1,15 @@
 \begin{abstract}
 
 This report discusses the implementation and optimization of a Delta Correlating
-Prediction Table (DCPT) prefetcher. The analysis and optimization is mainly
-performed by changing three different parameters; the size of the prediction
-table, the size of each delta ring buffer, and the size of each DCPT entry.
+Prediction Table (DCPT) prefetcher. We perform and study a number of experiments
+to properly analyze the prefetcher. We also compare the DCPT prefetcher with a
+more basic tagged sequential prefetcher.
 
-To properly analyze the prefetcher, a number of experiments are performed and
-studied. We also compare the DCPT prefetcher with a more basic prefetcher. A
-Tagged Sequential prefetcher is implemented for this purpose.
+\todo[inline]{Decide whether to keep this sentence:
+We analyze the performance by changing three
+different parameters; the number of entries in the table of the prediction
+table, the size of each delta ring buffer, and the size of each DCPT entry.}
+
 
 \todo[inline]{An experienced reader should be able to understand exactly what you
 have done from only reading the abstract. This is different from a summary.
