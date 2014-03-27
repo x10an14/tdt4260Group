@@ -2,15 +2,15 @@
 
 \subsection{Tagged Sequential Prefetching Algorithm}
 
-The simplest prefetcher is the sequential prefetcher, which simply fetches the
-next block of data \cite{seq}. The tagged sequential prefetcher is a slight
-improvement over the sequential prefetcher. As with sequential prefetching the
+The simplest prefetcher is the Sequential prefetcher, which simply fetches the
+next block of data \cite{seq}. The Tagged Sequential prefetcher is a slight
+improvement over the Sequential prefetcher. As with sequential prefetching the
 spatial locality of data is exploited. Additionally, a tagging system is used to
 mark the cache blocks that have been prefetced. This is used to be able to
-recognize when a prefetched cache block is actually accessed by the application,
-which implies that there has been a successful prefetch. Subsequent blocks are
-prefetched to the cache when there has been a cache miss, or when a previously
-prefetched cache entry has been accessed~\cite{grannaes}.
+recognize when a pre-fetched cache block is actually accessed by the
+application, which implies that there has been a successful prefetch. Subsequent
+blocks are prefetched into the cache when there has been a cache miss, or when a
+previously prefetched cache entry has been accessed~\cite{grannæs}.
 
 \subsection{Delta Correlating Prefetching Table Algorithm}
 
@@ -26,23 +26,6 @@ The prefetcher then adds the found delta pattern to the current address to
 obtain the predicted stream of future accesses. It then discards addresses which
 are already in the cache, or ones that are already being prefetched. It then
 issues prefetch commands for the remaining addresses.
-
-\todo[inline]{Størrelse og andre parametre bør heller være i metodologi-delen.}
-
-The size of the prefetcher has been a limitation in our development. Hardware
-components must usually be designed within an area budget, and in order to
-simulate realistic conditions, the implimentation is limited to a maximum of
-8KiB memory~\cite{guidelines}.
-
-\todo[inline]{Må redgjøre for at vi ikke overskrider denne et sted i
-rapporten?}
-
-The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
-so organizing the memory effectively is an important aspect. In the original
-implementation, only 4KiB of storage are used~\cite{dcpt}.
-
-
-\todo[inline]{Hvor mye av beskrivelsen skal her? Og hvor mye i Prefetcher Description?}
 
 \todo[inline]{Related Work\\
 - Reference the work that other researchers have done
