@@ -5,6 +5,6 @@ set ylabel "Speedup"
 set key right bottom
 
 plot "tagged-sequential-degree-1-data.txt" using 1:2 title "Degree = 1" with linespoints, \
-     "tagged-sequential-degree-5-data.txt" using 1:2 title "Degree = 2" with linespoints
+     "tagged-sequential-degree-5-data.txt" using 1:2 title "Degree = 5" with linespoints
 
 pause -1
