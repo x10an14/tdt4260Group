@@ -5,25 +5,31 @@ computers of tomorrow. This ``memory wall'' occurs when the on-chip speed of
 computations exceed the on-chip memory capacities, creating the situation where
 computing circuitry has to lie idle waiting for instructions/data to arrive from
 off-chip memory locations and be put into the on-chip cache. The cache is the
-fastest, most expensive, and smallest memory resource in a computer, usually
-residing as closely on-chip as possible to the \emph{central processing unit}
-(CPU). \emph{Prefetching} is a method for reducing this gap.
+quickest, most expensive, and smallest memory resource in a computer, usually
+residing as closely on-chip as possible to the computational units, like the
+\emph{central processing unit} (CPU). This results in a gap of time needed for
+fetching the correct instructions/data from off-chip memory onto the chip
+requiring the instructions/data for computations. \emph{Prefetching} is a method
+for reducing this gap.
 
-The idea behind prefecthing is to have a predictive module moving
+The idea behind prefetching is to have a predictive module moving
 instructions/data from the slower off-chip memory (like main memory) to the much
 faster cache memory on-chip \emph{before} it is needed. Hence, when the
-processor then requires the instruction/data, it is already in the cache and can
-be made use of within an amount of on-chip clock cycles, not having to wait for
-the slower off-chip clock cycles dominated by the time it takes for one or more
-chips to communicate (like on a bus).
+processor requires new instructions/data, they are already in the cache and can
+be made use of within a small amount of on-chip clock cycles, not having to wait
+for the slower off-chip clock cycles which are dominated by the time it takes
+for one or more chips to communicate (like on a bus).
 
-The purpose of this report is to develop and evaluate a prefetcher using the M5
-simulator, with a prefetcher utilizing maximum 8KiB. We implement a DCPT
-prefetcher, as this design proves to be very effective. The prefetcher is
-implemented according to the algorithm presented in ``Storage Efficient Hardware
-Prefetching using Delta Correlation Prediction Tables'' by Grannaes, Jahre, and
-Natvig~\cite{dcpt}. The storage limitation makes it important to examine how the
-8 KiB can be used most efficiently.
+The purpose of this report is to analyze and compare a DCPT prefetcher with
+Tagged Sequential prefetcher using the M5 simulator, with both prefetchers
+utilizing a maximum of 8KiB. We implement a DCPT prefetcher, as this design
+proves to be very effective.
+\todo[inline]{Confirm if we can actually phrase the above sentence as is. Can we prove that it is very effective?}
+The prefetcher is implemented according to the
+algorithm presented in ``Storage Efficient Hardware Prefetching using Delta
+Correlation Prediction Tables'' by Grannaes, Jahre, and Natvig~\cite{dcpt}. The
+storage limitation makes it important to examine how the 8 KiB can be used most
+efficiently.
 
 \todo[inline]{We need to explain the scheme chapter in the introduction as well!}
 
