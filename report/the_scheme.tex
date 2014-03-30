@@ -9,6 +9,12 @@ simulate realistic conditions, the implementation is limited to a maximum of
 
 \todo[inline]{Må redgjøre for at vi ikke overskrider denne et sted i rapporten?}
 
+\todo[inline]{Describe the interface and ``default simulator setup'' better.
+Explicitly state the conditions of the default simulator setup/the
+functions/structures in the interface.hh file. Don't simply say ``can be studied
+there.''\\
+\emph{Nico was very clear on this point...}}
+
 \todo[inline]{The following paragraph belongs in the background}
 The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
 so organizing the memory effectively is an important aspect. In the original
@@ -56,7 +62,7 @@ The amount of storage used by the DCPT prefetcher can be configured almost
 independently of the cache and memory sizes. The only limitation being that each
 entry contains three address fields which must be wide enough to cover the address
 space of the system. Apart from that, we can arbitrarily choose the size and
-number of deltas, as well as the number of entries in the table. 
+number of deltas, as well as the number of entries in the table.
 
 \todo[inline]{Calculate \% overhead, give the reader an idea of how much 1 MB,
 128 bits are in comparison with the limitations.}

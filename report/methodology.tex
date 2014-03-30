@@ -2,42 +2,82 @@
 
 \subsection{M5 Simulator}
 
-The M5 simulator is a popular simulator for computer architecture research, and
-it has a rich feature set \cite{user_doc}. With the given time limitations, we only utilized a subset of it’s complex software during our development.
+The M5 simulator used in our testing was only utilized with a subset of its rich
+feature set~\cite{user_doc}, due to the time limitation of this report.
+\todo[inline]{This sentence should belong in where we explain our
+implementation. Like the scheme...``The prefetcher utilizes the interface given
+in the \emph{interface.hh} file.''} Below, in table~\ref{tab:test-params}, we
+list the three variables we use as paramaters in our testing. We chose these
+three parameters for comparing our two prefetcher implementations.
 
-
-The prefetcher utilizes an interface given in the \emph{interface.hh} file. 
 \begin{table}[h]
+	\caption{Testing parameter variables}
 	\begin{tabularx}{\linewidth}{|X|c|X|}
-	\hline 
-	Variable & Value & Description \\ 
-	\hline 
-	BLOCK\_SIZE & 64 & Size of cache blocks (cache lines) in bytes \\ 
-	\hline 
-	MAX\_QUEUE\_SIZE & 100 & Maximum number of pending prefetch requests \\ 
-	\hline 
-	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\ 
-	\hline 
-	\end{tabularx} 
+	\hline
+	Variable & Value & Description \\
+	\hline
+	BLOCK\_SIZE & 64 & Size of cache blocks (cache lines) in bytes \\
+	\hline
+	MAX\_QUEUE\_SIZE & 100 & Maximum number of pending prefetch requests \\
+	\hline
+	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\
+	\hline
+	\end{tabularx}
+	\label{tab:test-params}
 \end{table}
 
+\begin{itemize}
+	\item \textbf{BLOCK\_SIZE:} \\
+		Since the cache-memory only transfers blocks of memory (which in turn
+		consist of words which the processor reads/writes), we can with this
+		variable define the size of the blocks fetched from memory. The larger
+		the blocks, the more words, hence less misses due to more words loaded.
+		However, if the block sizes are too big, then there cannot be a lot of
+		them in the cache at any given time, since it's effectiveness then
+		requires the program to perform the majority of its loads/stores from
+		the same memory block. So for it to be effective, it requires the
+		program not to fetch from different blocks. (Which is unrealistic.) The
+		optimum is therefore a balanced block size.
+	\item \textbf{MAX\_QUEUE\_SIZE:} \\
+		Since (to simulate realism) the prefetchers are required to operate
+		within the 8KiB memory limit, we cannot hold a non-finite amount of any
+		type of memory. This includes the list used to decide which memory
+		blocks to fetch next. If this list is too large, it may fetch blocks
+		which are not yet needed into a full cache, resulting in an eviction of
+		a memory block still needed from the cache. If this list is too small,
+		it could result in the memory blocks needed not having been fetched into
+		the cache at the time needed. Hence, the optimum should be a balanced
+		list size, not fetching so far ahead that the cache needs to evict
+		memory blocks \textit{still in use}, but neither so that memory blocks
+		\textit{needed next} are not already in the cache.
+	\item \textbf{MAX\_PHYS\_MEM\_SIZE:}
+		Since the prefetcher deals with addresses, the maxiumum size of physical
+		memory decides both the addresspace (which has direct consequences for
+		the space the prefetcher needs to store these addresses with regards to
+		the 8KiB limitation), and how many words (which are then grouped in
+		blocks decided by the \textbf{BLOCK\_SIZE} variable) the memory holds.
+		The larger this variable is, there is a bigger potential for more
+		fetching from different disparate blocks, than if this variable is
+		small, results in the opposite; a smaller total of words in the physical
+		memory.
+\end{itemize}
 
-\todo[inline]{Describe the interface and ``default simulator setup'' better.
-Explicitly state the conditions of the default simulator setup/the
-functions/structures in the interface.hh file. Don't simply say ``can be studied
-there.''\\
-\emph{Nico was very clear on this point...}}
+The M5 simulator runs several of the SPEC CPU2000 benchmarks available on the
+pfJudge course website~\cite{guidelines}, so that the prefetcher performance can
+be evaluated with different types benchmarks representing typical examples of
+different types of applications. The benchmarks considered in this report are;
+``\emph{ammp}'', ``\emph{applu}'', ``\emph{apsi}'', ``\emph{art110}'',
+``\emph{art470}'', ``\emph{bzip2\_graphic}'', ``\emph{bzip2\_program}'',
+``\emph{bzip2\_source}'', ``\emph{galgel}'', ``\emph{swim}'', ``\emph{twolf}'',
+``\emph{wupwise}''.
 
+\todo[inline]{Andreas/Ingebrigt: Bruker vi alle disse ovenfornevnte
+benchmarkene???\\
+Trenger også at noen forteller meg/eller skriver selv, hvorfor
+vi bruker de benchmarkene vi ender opp med å bruke!!!}
 
-
-\todo[inline]{antar at det er det vi kommer til å gjøre}
-
-The simulator runs several of the SPEC CPU2000 benchmarks, so that the prefetcher
-performance can be evaluated with different applications.
-The benchmarks considered in this report are ammp, applu, apsi, art110, art470,
-bzip2\_graphic, bzip2\_program, bzip2\_source, galgel swim, twolf and wupwise.
-The score that is referred to during this report is the average speedup on these benchmarks.
-
+The score reported in the \textit{Results} section are scores given to our
+implemented prefetchers when running the abovementioned benchmarks.
 
 \todo[inline]{Explain your experimental setup\\
 - Which simulator did you use?\\
