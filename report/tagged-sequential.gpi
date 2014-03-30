@@ -1,10 +1,12 @@
+set terminal epslatex
+set output "tagged-sequential-plot.tex"
 
 set xlabel "Distance"
 set ylabel "Speedup"
 
 set key right bottom
 
+set size 0.7, 0.7
+
 plot "tagged-sequential-degree-1-data.txt" using 1:2 title "Degree = 1" with linespoints, \
      "tagged-sequential-degree-5-data.txt" using 1:2 title "Degree = 5" with linespoints
-
-pause -1

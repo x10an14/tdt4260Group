@@ -1,12 +1,14 @@
+set terminal epslatex
+set output "DCPT-plot.tex"
 
 set xlabel "DIFFERENT PARAMETERS"
 set ylabel "Speedup"
 
 set key right bottom
 
-plot 	"DCPT_DELTA_BITS.txt" using 1:2 title "Delta Bits" with linespoints, \
-		"DCPT_TABLE_SIZE.txt" using 1:2 title "TABLE_SIZE" with linespoints, \
-		"DCPT_NUM_DELTAS.txt" using 1:2 title "NUM_DELTAS" with linespoints, \
-     	"DCPT_MAX_DEGREE.txt" using 1:2 title "MAX_DEGREE" with linespoints
+set size 0.7, 0.7
 
-pause -1
+plot 	"DCPT_DELTA_BITS.txt" using 1:2 title "Delta Bits" with linespoints, \
+		"DCPT_TABLE_SIZE.txt" using 1:2 title "TABLE\\_SIZE" with linespoints, \
+		"DCPT_NUM_DELTAS.txt" using 1:2 title "NUM\\_DELTAS" with linespoints, \
+     	"DCPT_MAX_DEGREE.txt" using 1:2 title "MAX\\_DEGREE" with linespoints
