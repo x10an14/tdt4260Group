@@ -1,14 +1,5 @@
 \section{The Scheme}
 
-
-\todo[inline]{The following paragraph belongs in methodology}
-The size of the prefetcher has been a limitation in our development. Hardware
-components must usually be designed within an area budget, and in order to
-simulate realistic conditions, the implementation is limited to a maximum of
-8KiB memory~\cite{guidelines}.
-
-\todo[inline]{Må redgjøre for at vi ikke overskrider denne et sted i rapporten?}
-
 \todo[inline]{Describe the interface and ``default simulator setup'' better.
 Explicitly state the conditions of the default simulator setup/the
 functions/structures in the interface.hh file. Don't simply say ``can be studied
@@ -18,7 +9,8 @@ there.''\\
 \todo[inline]{The following paragraph belongs in the background}
 The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
 so organizing the memory effectively is an important aspect. In the original
-implementation, only 4KiB of storage are used~\cite{dcpt}.
+implementation~\cite{dcpt} we based our implementation on, only 4KiB of storage
+are used.
 
 \todo[inline]{Our prefetcher implementation goes here. Rename the title to ``Our implementation''?\\
 - Explain your scheme in detail\\
@@ -30,10 +22,13 @@ may be in order\\}
 
 \subsection{Delta Correlating Prediction Table}
 
-The DCPT implementation attempts to follow the pseudocode as closely as possible,
-however because we are simulating a hardware implementation, there are some additional
-checks in place to deal with the fact that the bit sizes some of the fields in the
-data structures are larger than they would be in hardware, so we have to limit them
+The DCPT implementation attempts to follow the pseudocode described in the
+original implementation~\cite{dcpt}, as closely as possible. However because we
+are simulating a hardware implementation, there are some additional checks in
+place to deal
+\todo[inline]{Nico told us to ignore all things done by compiler. Hence, the below sentence was to be removed he felt. But I didn't write this, so I don't know if this should be removed completely or replaced with something else. -C}
+with the fact that the bit sizes some of the fields in the data
+structures are larger than they would be in hardware, so we have to limit them
 artificially.
 
 The prefetcher can be configured by adjusting four parameters; the number of entries
@@ -41,28 +36,21 @@ in the table, the number of deltas per entry and the size in bits of each delta.
 
 \subsection{Tagged Sequential}
 
-The tagged sequential prefetcher can be configured by adjusting two parameters.
+The Tagged Sequential prefetcher can be configured by adjusting two parameters.
 The \emph{distance} is how many blocks ahead of the currently accessed block the
 prefetcher will fetch, and the \emph{degree} is how many consequtive blocks it will
 fetch starting at this location in memory.
 
-\todo[inline]{The following paragraph belongs in Results}
-Our prefetcher was simulated with different combinations of degree and distance,
-in the range of 0--6. The combination that got the best overall score on the
-benchmark tests was with degree 5 and distance 4.
-
-\subsubsection{Hardware requirements}
-
-With the given implementation, a tagged sequential prefetcher simply requires
+With the given implementation, a Tagged Sequential prefetcher simply requires
 one bit per cache word in order to store the associated tag. With an L2 cache
 size of 1 MB and 64 bit word size, there are 128 different words in the cache,
 meaning 128 bits of storage is required for the tagged prefetcher.
 
-The amount of storage used by the DCPT prefetcher can be configured almost
+The amount of storage used by the DCPT prefetcher can be configured
 independently of the cache and memory sizes. The only limitation being that each
-entry contains three address fields which must be wide enough to cover the address
-space of the system. Apart from that, we can arbitrarily choose the size and
-number of deltas, as well as the number of entries in the table.
+entry contains three address fields which must be wide enough to cover the
+address space of the system. Apart from that, we can arbitrarily choose the size
+and number of deltas, as well as the number of entries in the table.
 
 \todo[inline]{Calculate \% overhead, give the reader an idea of how much 1 MB,
 128 bits are in comparison with the limitations.}
