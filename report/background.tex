@@ -1,5 +1,8 @@
 \section{Background}
 
+\todo[inline]{We need a small ingress here \\
+-Nico}
+
 \subsection{Tagged Sequential Prefetching Algorithm}
 
 The simplest prefetcher is the Sequential prefetcher, which simply fetches the
@@ -23,9 +26,12 @@ beginning with these two deltas. If there are multiple matches, we choose the
 longest match.
 
 The prefetcher then adds the found delta pattern to the current address to
-obtain the predicted stream of future accesses. It then discards addresses which
+obtain the predicted stream of future accesses. It discards addresses which
 are already in the cache, or ones that are already being prefetched. It then
 issues prefetch commands for the remaining addresses.
+
+\todo[inline]{What is prefetch degree and distance!? \\
+-Nico}
 
 \todo[inline]{Related Work\\
 - Reference the work that other researchers have done
