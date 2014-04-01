@@ -10,28 +10,45 @@ def storage_usage(num_deltas, table_size, delta_bits):
 # (NUM_DELTAS, TABLE_SIZE, DELTA_BITS, MAX_DEGREE) 
 
 params = [
-    (19, 98,  12, "NUM_DELTAS"), # settings from Magnu's paper
-    (19, 196, 12, "NUM_DELTAS"), # double # of entries
-    (19, 196, 12, 1),            # degree = 1
-    (19, 196, 12, 10),           # degree = 10
-    (48, 98,  12, "NUM_DELTAS"), # higher number of deltas
-    (19, 98,  28, "NUM_DELTAS"), # big deltas
+    # Additional NUM_DELTAS data
+    (16, 98, 12, "NUM_DELTAS"),
+    (19, 98, 12, "NUM_DELTAS"),
+    (21, 98, 12, "NUM_DELTAS"),
+    (22, 98, 12, "NUM_DELTAS"),
+    (30, 98, 12, "NUM_DELTAS"),
+    (35, 98, 12, "NUM_DELTAS"),
+    (40, 98, 12, "NUM_DELTAS"),
+    (45, 98, 12, "NUM_DELTAS"),
 
-    # hill climbing (1 step)
-    (18, 98,  12, "NUM_DELTAS"), # NUM_DELTAS -1
-    (20, 98,  12, "NUM_DELTAS"), # NUM_DELTAS +1
-    (19, 97,  12, "NUM_DELTAS"), # TABLE_SIZE -1
-    (19, 99,  12, "NUM_DELTAS"), # TABLE_SIZE +1
-    (19, 98,  11, "NUM_DELTAS"), # DELTA_BITS -1
-    (19, 98,  13, "NUM_DELTAS"), # DELTA_BITS +1
+    # DELTA_BITS 
+    (19, 98,  8, "NUM_DELTAS"),
+    (19, 98,  9, "NUM_DELTAS"),
+    (19, 98, 10, "NUM_DELTAS"),
+    (19, 98, 15, "NUM_DELTAS"),
 
-    # hill climbing (5 steps)
-    (14, 98,  12, "NUM_DELTAS"), # NUM_DELTAS -5
-    (24, 98,  12, "NUM_DELTAS"), # NUM_DELTAS +5
-    (19, 93,  12, "NUM_DELTAS"), # TABLE_SIZE -5
-    (19, 103, 12, "NUM_DELTAS"), # TABLE_SIZE +5
-    (19, 98,   7, "NUM_DELTAS"), # DELTA_BITS -5
-    (19, 98,  17, "NUM_DELTAS"), # DELTA_BITS +5
+    # TABLE_SIZE
+    (19,  90, 12, "NUM_DELTAS"),
+    (19,  95, 12, "NUM_DELTAS"),
+    (19,  96, 12, "NUM_DELTAS"),
+    (19, 100, 12, "NUM_DELTAS"),
+    (19, 101, 12, "NUM_DELTAS"),
+    (19, 120, 12, "NUM_DELTAS"),
+    (19, 140, 12, "NUM_DELTAS"),
+    (19, 160, 12, "NUM_DELTAS"),
+    (19, 180, 12, "NUM_DELTAS"),
+
+    # MAX_DEGREE
+    (19,  98, 12, 5),
+    (19,  98, 12, 15),
+    (19,  98, 12, 18),
+    (19,  98, 12, 20),
+    (19,  98, 12, 25),
+
+    # BEST
+    (15,  98, 17, "NUM_DELTAS"),
+    (20,  98, 17, "NUM_DELTAS"),
+    (25,  98, 17, "NUM_DELTAS"),
+    (30,  98, 17, "NUM_DELTAS"),
 ]
 
 source = open("prefetcher.cc").read() 

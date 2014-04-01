@@ -22,7 +22,7 @@ void prefetch_init(void)
 void prefetch_several(Addr address)
 {
     for (unsigned int i = 0; i < DEGREE; i++){
-        Addr pf_addr = address + BLOCK_SIZE * (DEGREE + DISTANCE);
+        Addr pf_addr = address + BLOCK_SIZE * (i + DISTANCE);
         if (!in_cache(pf_addr))
             issue_prefetch(pf_addr);
     }
