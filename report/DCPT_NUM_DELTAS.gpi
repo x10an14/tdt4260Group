@@ -1,0 +1,10 @@
+
+set xlabel "NUM_DELTAS"
+set ylabel "Speedup"
+
+set key right bottom
+
+plot		"DCPT_NUM_DELTAS.txt" using 1:2 title "NUM_DELTAS" with linespoints
+
+
+pause -1

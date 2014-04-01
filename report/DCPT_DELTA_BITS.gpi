@@ -1,0 +1,10 @@
+
+set xlabel "DELTA_BITS"
+set ylabel "Speedup"
+
+set key right bottom
+
+plot 	"DCPT_DELTA_BITS.txt" using 1:2 title "Delta Bits" with linespoints \
+
+
+pause -1

@@ -1,0 +1,10 @@
+
+set xlabel "TABLE_SIZE"
+set ylabel "Speedup"
+
+set key right bottom
+
+plot		"DCPT_TABLE_SIZE.txt" using 1:2 title "TABLE_SIZE" with linespoints
+
+
+pause -1

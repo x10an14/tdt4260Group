@@ -1,0 +1,9 @@
+
+set xlabel "MAX_DEGREE"
+set ylabel "Speedup"
+
+set key right bottom
+
+plot 	"DCPT_MAX_DEGREE.txt" using 1:2 title "MAX_DEGREE" with linespoints
+
+pause -1
