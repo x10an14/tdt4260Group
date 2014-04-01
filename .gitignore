@@ -27,6 +27,10 @@
 *.bbl
 *.blg
 
+# Compiled graphs
+*-plot.eps
+*-plot.tex
+
 #IEEEtran archive/folder
 IEEEtran.tar
 IEEEtran/
