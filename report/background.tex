@@ -9,7 +9,7 @@ The simplest prefetcher is the Sequential prefetcher, which simply fetches the
 next block of data \cite{seq}. The Tagged Sequential prefetcher is a slight
 improvement over the Sequential prefetcher. As with sequential prefetching the
 spatial locality of data is exploited. Additionally, a tagging system is used to
-mark the cache blocks that have been prefetced. This is used to be able to
+mark the cache blocks that have been prefetched. This is used to be able to
 recognize when a pre-fetched cache block is actually accessed by the
 application, which implies that there has been a successful prefetch. Subsequent
 blocks are prefetched into the cache when there has been a cache miss, or when a
