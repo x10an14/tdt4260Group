@@ -18,9 +18,9 @@
 // we would not store the final 8 bits of the PC, as they are implicit from the
 // position in the table. These extra 8 bits have been used to store one more
 // delta per entry.
-#define NUM_DELTAS 9
-#define TABLE_SIZE 256
-#define DELTA_BITS 8
+#define NUM_DELTAS 19
+#define TABLE_SIZE 98
+#define DELTA_BITS 12
 #define MAX_DEGREE NUM_DELTAS
 
 #define DELTA_MIN (- (1 << (DELTA_BITS - 1)))
