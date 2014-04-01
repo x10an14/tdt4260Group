@@ -13,59 +13,6 @@ feature set~\cite{user_doc}, due to the time limitation of this report.
 implementation. Like the scheme...``The prefetcher utilizes the interface given
 in the \emph{interface.hh} file.''}
 
-Table~\ref{tab:test-params} lists the parameters we use in our testing. We chose
-these three parameters for comparing our two prefetcher implementations.
-
-\begin{table}[h]
-	\caption{Testing parameter variables}
-	\begin{tabularx}{\linewidth}{|X|c|X|}
-	\hline
-	Variable & Value & Description \\
-	\hline
-	BLOCK\_SIZE & 64 & Size of cache blocks (cache lines) in bytes \\
-	\hline
-	MAX\_QUEUE\_SIZE & 100 & Maximum number of pending prefetch requests \\
-	\hline
-	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\
-	\hline
-	\end{tabularx}
-	\label{tab:test-params}
-\end{table}
-
-\begin{itemize}
-	\item \textbf{BLOCK\_SIZE:} \\
-		Since the cache-memory only transfers blocks of memory, we can with this
-		variable define the size of the blocks fetched from memory. The larger
-		the blocks, the more words, hence less misses due to more words loaded.
-		However, if the block sizes are too big, then there cannot be a lot of
-		them in the cache at any given time, since it's effectiveness then
-		requires the program to perform the majority of its loads/stores from
-		the same memory block. So for it to be effective, it requires the
-		program not to fetch from different blocks. (Which is unrealistic). The
-		optimum is therefore a balanced block size.
-	\item \textbf{MAX\_QUEUE\_SIZE:} \\
-		Since (to simulate realism) the prefetchers are required to operate
-		within the 8KiB memory limit, we cannot hold an infinite amount of
-		memory. This includes the list used to decide which memory blocks to
-		fetch next. If this list is too large, it may fetch blocks which are not
-		yet needed into a full cache, resulting in an eviction of a memory block
-		still needed from the cache. If this list is too small, it could result
-		in the memory blocks required next not having been fetched into the
-		cache at the time needed. Hence, the optimum should be a balanced list
-		size, not fetching so far ahead that the cache needs to evict memory
-		blocks \textit{still in use}, but neither so that memory blocks
-		\textit{needed next} are not already in the cache.
-	\item \textbf{MAX\_PHYS\_MEM\_SIZE:}
-		Since the prefetcher deals with addresses, the maxiumum size of physical
-		memory decides both the addresspace (which has direct consequences for
-		the space the prefetcher needs to store these addresses with regards to
-		the 8KiB limitation), and how many words (which are then grouped in
-		blocks decided by the \textbf{BLOCK\_SIZE} variable) the memory holds.
-		The larger this variable is, there is a bigger potential for more
-		fetching from different disparate blocks, than if this variable is
-		small, results in the opposite; a smaller total of words in the physical
-		memory.
-\end{itemize}
 
 The M5 simulator runs several of the SPEC CPU2000 benchmarks available on the
 pfJudge course website~\cite{guidelines}, so that the prefetcher performance can
