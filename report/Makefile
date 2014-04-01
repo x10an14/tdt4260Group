@@ -1,5 +1,5 @@
 
-report.pdf: report.tex DCPT-plot.tex tagged-sequential-plot.tex
+report.pdf: report.tex #DCPT-plot.tex tagged-sequential-plot.tex
 	pdflatex report.tex
 	bibtex report.aux
 	pdflatex report.tex
