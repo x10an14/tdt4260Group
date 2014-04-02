@@ -15,6 +15,11 @@ application, which implies that there has been a successful prefetch. Subsequent
 blocks are prefetched into the cache when there has been a cache miss, or when a
 previously prefetched cache entry has been accessed~\cite{grannaes}.
 
+The Tagged Sequential prefetcher can be configured by adjusting two parameters.
+The \emph{distance} is how many blocks ahead of the currently accessed block the
+prefetcher will fetch, and the \emph{degree} is how many consequtive blocks it
+will fetch starting at this location in memory.
+
 \subsection{Delta Correlating Prefetching Table Algorithm}
 
 DCPT is a more advanced method. It is an instruction-based prefetcher using a
