@@ -1,6 +1,16 @@
 \section{The Scheme}
 
-\todo[inline]{NEW STRUCTURE FOR THE SCHEME!!!! AS FOLLOWS:}
+In this section, we explain our implementation and it's setup.
+
+The prefetchers we are creating for this project will be tested by the
+previously mentioned M5 simulator. The M5 simulator runs several of the SPEC
+CPU2000 benchmarks available on the pfJudge course website~\cite{guidelines}, so
+that the prefetcher performance can be evaluated with different types benchmarks
+representing typical examples of different types of applications. Only a subset
+of M5's rich feature set~\cite{user_doc} was utilized in our testing, due to the
+time limitation of this report.
+
+
 
 \subsection{Simulator Setup}
 
@@ -11,7 +21,7 @@ functions/structures in the interface.hh file. Don't simply say ``can be studied
 there.''}
 
 
-Table~\ref{tab:test-params} lists the limits of the parameters the m5 simulator has. 
+Table~\ref{tab:test-params} lists the limits of the parameters the m5 simulator has.
 \begin{table}[h]
 	\caption{Interface definitions}
 	\begin{tabularx}{\linewidth}{|X|c|X|}
