@@ -7,21 +7,39 @@ previously mentioned M5 simulator. The M5 simulator runs several of the SPEC
 CPU2000 benchmarks available on the pfJudge course website~\cite{guidelines}, so
 that the prefetcher performance can be evaluated with different types benchmarks
 representing typical examples of different types of applications. Only a subset
-of M5's rich feature set~\cite{user_doc} was utilized in our testing, due to the
-time limitation of this report.
+of M5's rich feature set, chapter 2~\cite{user_doc} was utilized in our testing,
+due to the time limitation of this report.
 
+Both the Tagged Sequential prefetcher and the DCPT prefetcher were implemented
+based on the following three missing functions in the framework provided to us
+by the course, chapter 3~\cite{user_doc}.
+\begin{itemize}
+	\item \textbf{void prefetch\_init(void)}
+		This function will be called before any memory access, to let our
+		implemeneted prefetchers initialize their data structures.
+	\item \textbf{void prefetch\_access(AccessStat stat)}
+		This function tells the implemented prefetcher about a cache access.
+	\item \textbf{void prefetch\_complete(Addr addr)}
+		This function notifies the implemented prefetcher about a prefetch load
+		that has just completed.
+\end{itemize}
 
+In the framework our prefetchers are implemented in, a cache word is 64 bits
+large, and there are 64 cache words per cache block. Our prefetcher is used for
+the Level 2 (L2) cache, which is 1MiBs large. This means that the L2 cache has
+space for $\frac{8 \cdot 1024^{2}}{64} = 131$~$072$ cache words. Since a cache
+block consists of 64 cache words, there's space for $\frac{8 \cdot 1024^{2}}{64
+\cdot 64} = 2048$ cache blocks in the L2 cache.
 
 \subsection{Simulator Setup}
 
 \todo[inline]{Describing the simulator setup and config values. \\
 Describe the ``default simulator setup'' better.
-Explicitly state the conditions of the default simulator setup/the
-functions/structures in the interface.hh file. Don't simply say ``can be studied
-there.''}
+Explicitly state the conditions of the default simulator. Don't simply say ``can
+be studied there.''}
 
-
-Table~\ref{tab:test-params} lists the limits of the parameters the m5 simulator has.
+Table~\ref{tab:prefetch-consts} lists the limits of the parameters the m5
+simulator has.
 \begin{table}[h]
 	\caption{Interface definitions}
 	\begin{tabularx}{\linewidth}{|X|c|X|}
@@ -35,7 +53,7 @@ Table~\ref{tab:test-params} lists the limits of the parameters the m5 simulator 
 	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\
 	\hline
 	\end{tabularx}
-	\label{tab:test-params}
+	\label{tab:prefetch-consts}
 \end{table}
 
 \begin{itemize}
@@ -78,24 +96,16 @@ Table~\ref{tab:test-params} lists the limits of the parameters the m5 simulator 
 \todo[inline]{Describing our Tagged Sequential implementation. \\
 REMEMBER TO EXPLAIN THE INTERFACE!!}
 
-The Tagged Sequential prefetcher can be configured by adjusting two parameters.
-The \emph{distance} is how many blocks ahead of the currently accessed block the
-prefetcher will fetch, and the \emph{degree} is how many consequtive blocks it will
-fetch starting at this location in memory.
-
 With the given implementation, a Tagged Sequential prefetcher simply requires
-one bit per cache word in order to store the associated tag. With an L2 cache
-size of 1 MB and 64 bit word size, there are 128 different words in the cache,
-meaning 128 bits of storage is required for the tagged prefetcher.
+one bit per cacheword to store the associated tag. With our L2 cache size, cache block size, and word size, this equates to needing $131$~$072$ tag bits to
+represent all the cache words. This amount equates to 16KiB of memory, or in
+other words $\frac{1}{512} \approx 2\%$ of the L2 cache used for overhead.
 
-The amount of storage used by the DCPT prefetcher can be configured
+The amount of storage used by the DCPT prefetcher however can be configured
 independently of the cache and memory sizes. The only limitation being that each
 entry contains three address fields which must be wide enough to cover the
 address space of the system. Apart from that, we can arbitrarily choose the size
 and number of deltas, as well as the number of entries in the table.
-
-\todo[inline]{Calculate \% overhead, give the reader an idea of how much 1 MB,
-128 bits are in comparison with the limitations.}
 
 \subsection{DCPT Implementation}
 
