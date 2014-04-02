@@ -9,4 +9,7 @@ set key right bottom
 set size 0.7, 0.7
 
 plot "tagged-sequential-degree-1-data.txt" using 1:2 title "Degree = 1" with linespoints, \
+	"tagged-sequential-degree-2-data.txt" using 1:2 title "Degree = 2" with linespoints, \
+	"tagged-sequential-degree-3-data.txt" using 1:2 title "Degree = 3" with linespoints, \
+	"tagged-sequential-degree-4-data.txt" using 1:2 title "Degree = 4" with linespoints, \
      "tagged-sequential-degree-5-data.txt" using 1:2 title "Degree = 5" with linespoints
