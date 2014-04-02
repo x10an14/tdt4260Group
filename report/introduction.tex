@@ -6,10 +6,10 @@ exceed the on-chip memory capacities, creating the situation where computing
 circuitry has to lie idle waiting for instructions/data to arrive from off-chip
 memory locations. The cache is generally considered the quickest, most
 expensive, and smallest memory, usually residing as closely on-chip as possible.
-This results in a time-gap where the on-chip circuitry needs to wait some
+Because of this, a time-gap occurs when the on-chip circuitry needs to wait some
 clock-cycles for the the correct instructions/data to be fetched from off-chip
-memory onto the chip requiring the instructions/data for computations.
-\emph{Prefetching} is a method for reducing this gap.
+memory, and into the cache of the chip requiring the instructions/data for
+computations. \emph{Prefetching} is a method for reducing this gap.
 
 The idea behind prefetching is to have a predictive module moving
 instructions/data from the slower off-chip memory to the much faster cache
