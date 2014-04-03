@@ -36,7 +36,7 @@ to our implemented prefetchers when running the abovementioned benchmarks.
 
 When testing the TS prefetcher, we vary both the \emph{distance} and the
 \emph{degree} parameters it uses. The distances tested are in the range of 2 to
-20, and the degree from 1 to 4.
+20, and the degree from 1 to 4. 
 
 The intention of testing the TS prefetcher, is to have a benchmark to compare
 the DCPT prefetcher against. Hence, we use the averaged scores given by the
@@ -54,6 +54,9 @@ Although these optimal values are obtained with different benchmarks and with a
 maximum 4KiB prefetcher size, it is a reasonable starting point. The impact of
 each parameter is then studied by keeping two of them constant while varying the
 third.
+
+Since our implementation has 8KiB available, double of M. Jahres \cite{dcpt} has, we can exploit this by having larger tables, delta-sizes and ring buffer size.
+Our analysis will reveal wich parameter combinations that works best.
 
 After this analysis we simulate with the optimal values of each parameter.
 
