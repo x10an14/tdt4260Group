@@ -1,9 +1,9 @@
 
-report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-num-deltas-plot.tex tagged-sequential-plot.tex bibliography.bib abstract.tex background.tex conclusion.tex discussion.tex introduction.tex methodology.tex results.tex the_scheme.tex
-	pdflatex report.tex
+report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-num-deltas-plot.tex tagged-sequential-plot.tex bibliography.bib abstract.tex background.tex config.tex conclusion.tex discussion.tex introduction.tex methodology.tex results.tex the_scheme.tex
+	pdflatex --shell-escape report.tex
 	bibtex report.aux
-	pdflatex report.tex
-	pdflatex report.tex #Two runs for references
+	pdflatex --shell-escape report.tex
+	pdflatex --shell-escape report.tex #Two runs for references
 
 all: report.pdf
 
