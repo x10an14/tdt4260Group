@@ -1,20 +1,18 @@
 \section{Results}
 
-\subsection{Tagged sequential}
+\subsection{Tagged Sequential Results}
 
-As described previously, the tagged sequential prefetcher was  implemented with
-degree 5 and distance 4. The resulting average speedup was 1.032. The ``ammp''
-and ``twolf'' benchmarks gave low speedups, with a speedup of
-0.759 and 0.983 respectively (speedup below one means the prefetcher actually
-slows down the application).
+The Tagges Sequential prefetcher was simulated with different combinations of
+degree and distance, in the range of 0--6. The combination that got the best
+overall score on the benchmark tests was with degree 5 and distance 4.
 
-\todo[inline]{In the below sentence, what is meant by ``large objects''? We also
-cannot predict future memory accesses using spatial locality. Re-phrase or
-remove.}
+The resulting average speedup was 1.032. The ``ammp'' and ``twolf'' benchmarks
+gave lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
+results below 1.000 means the prefetcher actually slows down the application).
 
-This is expected as those applications use large
-objects and irregular cache alignment,  which makes it very challenging to
-predict future memory accesses using spatial locality.
+This is expected as those applications need to fetch instructions/data from random locations, making it very difficult for the Tagged Sequential prefetcher to get any use from sequential fetching, which relies on spatial locality.
+
+\subsection{DCPT Results}
 
 \todo[inline]{The results goes here.
 \\
@@ -27,25 +25,3 @@ performance of a class of schemes\\
 Sensitivity analysis: \\
 - Check the impact of model assumptions on your
 scheme}
-
-Our prefetcher was simulated with different combinations of degree and distance,
-in the range of 0--6. The combination that got the best overall score on the
-benchmark tests was with degree 5 and distance 4.
-
-\begin{comment}
-\begin{figure}[tbp]
-\begin{center}
-    \input{tagged-sequential-plot}
-    \caption{Speedup using the tagged sequential prefetcher}
-    \label{graph:tagged-sequential}
-\end{center}
-\end{figure}
-
-\begin{figure}[tbp]
-\begin{center}
-    \input{DCPT-plot}
-    \caption{Speedup using the DCPT prefetcher}
-    \label{graph:dcpt}
-\end{center}
-\end{figure}
-\end{comment}
