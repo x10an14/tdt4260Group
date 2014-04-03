@@ -10,9 +10,12 @@ The resulting average speedup was 1.032. The ``ammp'' and ``twolf'' benchmarks
 gave lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
 results below 1.000 means the prefetcher actually slows down the application).
 
-This is expected as those applications need to fetch instructions/data from random locations, making it very difficult for the Tagged Sequential prefetcher to get any use from sequential fetching, which relies on spatial locality.
+This is expected as those applications need to fetch instructions/data from
+random locations, making it very difficult for the Tagged Sequential prefetcher
+to get any benefit from sequential fetching, which relies on spatial locality.
 
 \subsection{DCPT Results}
+
 
 \todo[inline]{The results goes here.
 \\

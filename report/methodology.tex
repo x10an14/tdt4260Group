@@ -1,44 +1,44 @@
 \section{Methodology}
 
-The size of the prefetcher has been a limitation in our development. Hardware
-components must usually be designed within an area budget, and in order to
-simulate realistic conditions, the implementation is limited to a maximum of
-8KiB memory~\cite{guidelines}. The simulation is performed by the M5 simulator
-available on the Kongull HPC cluster at NTNU.
+Hardware components must usually be designed within an area budget, and in order
+to simulate realistic conditions, the implemented prefetchers are limited to a
+maximum of 8KiB memory~\cite{guidelines}. The simulation is performed by the M5
+simulator available on the Kongull HPC cluster at NTNU.
 
 The M5 simulator used in our testing was only utilized with a subset of its rich
 feature set~\cite{user_doc}, due to the time limitation of this report.
 
-\todo[inline]{This sentence should belong in where we explain our
-implementation. Like the scheme...``The prefetcher utilizes the interface given
-in the \emph{interface.hh} file.''}
+The test result scores reported in the \textit{Results} section are scores given
+to our implemented prefetchers when running the abovementioned benchmarks.
+
+When testing the Tagged Sequential prefetcher, we vary both the \emph{distance}
+and the \emph{degree} parameters it uses. When testing the DCPT prefetcher we
+vary the \emph{table size}, \emph{delta size}, \emph{delta ring buffer size},
+and \emph{maximum degree} parameters it uses. For both prefetchers, several
+simulations with different combinations of these parameters were run to check
+for patterns.
+
+\subsection{The M5 Simulator}
 
 The M5 simulator runs several of the SPEC CPU2000 benchmarks available on the
 pfJudge course website~\cite{guidelines}. The benchmarks considered in this
 report are; ``\emph{ammp}'', ``\emph{applu}'', ``\emph{apsi}'',
 ``\emph{art110}'', ``\emph{art470}'', ``\emph{bzip2\_graphic}'',
 ``\emph{bzip2\_program}'', ``\emph{bzip2\_source}'', ``\emph{galgel}'',
-``\emph{swim}'', ``\emph{twolf}'' and ``\emph{wupwise}''. It is important that
-the prefetcher performance is evaluated with a variety of benchmarks
-representing typical applications. The mentioned benchmarks are widely
-recognized. We also believe that they introduce a realistic set of challenges
-for a prefetcher, so that the results give a proper foundation for performance
-evaluation\footnote{For more information about the benchmarks, please see
-\emph{www.spec.org}.}.
+``\emph{swim}'', ``\emph{twolf}'' and ``\emph{wupwise}''.
 
-To optimize the tagged sequential prefetcher, both the \emph{distance} and the
-\emph{degree} was varied. The DCPT prefetcher was optimized by changing
-\emph{table size}, \emph{delta size}, \emph{delta ring buffer size}, and
-\emph{maximum degree}. For both prefetchers, several simulations with different
-combinations of these parameters were run to check for patterns.
+It is important that the prefetcher performance is evaluated with a variety of
+benchmarks representing typical applications. The mentioned benchmarks are
+widely used and recognized. We also believe that the results give a proper
+foundation for performance evaluation\footnote{For more information about the
+benchmarks, please see \emph{www.spec.org}.}.
 
-\todo[inline]{Andreas/Ingebrigt: Bruker vi alle disse ovenfornevnte
-benchmarkene???\\
-Trenger også at noen forteller meg/eller skriver selv, hvorfor
-vi bruker de benchmarkene vi ender opp med å bruke!!!}
+\todo[inline]{Needs more details? I don't know -C}
 
-The score reported in the \textit{Results} section are scores given to our
-implemented prefetchers when running the abovementioned benchmarks.
+\subsection{Tagged Sequential Tests}
+
+\subsection{DCPT Tests}
+
 
 \todo[inline]{Explain your experimental setup\\
 - Which simulator did you use?\\
