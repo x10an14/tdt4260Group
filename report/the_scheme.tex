@@ -26,11 +26,19 @@ at once.
 
 \subsection{TS Implementation}
 
-For the TS implementation, we only implement the
-\textbf{prefetch\_access} function. The implementation directly follows the
-algorithm.
+For the TS prefetcher is implemented within the functions
+\textbf{prefetch\_access} and \textbf{prefetch\_complete}. The 
+implementation directly follows the algorithm. 
+\textbf{prefetch\_complete} simply sets the prefetch bit on all the 
+blocks that are prefetched into the cache, to keep track on the cache content 
+that originates from prefetching. When data is accessed by the CPU 
+\textbf{prefetch\_access} will check if the 
+prefetch bit of the respective data is set. If the bit is set, and if successive 
+data is not already in the cache, prefetching will be requested. 
+The function also requests prefetching of successive data when a cache 
+miss is reported. Prefetching is performed with the given degree 
+and distance in both cases.
 
-\todo[inline]{Og implementasjonen av prefetch\_access da??? -C}
 
 \subsection{DCPT Implementation}
 

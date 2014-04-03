@@ -5,8 +5,12 @@ set xlabel "Number of entries in the table"
 set ylabel "Speedup"
 
 set boxwidth 0.25
-set style fill solid
+set style fill pattern border rgb "black"
 
 set key right bottom
+
+set yrange [1.017:1.026]
+
+set size 0.7, 0.7
 
 plot "DCPT_TABLE_SIZE.txt" using 0:2:xtic(1) title "" with boxes

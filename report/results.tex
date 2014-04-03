@@ -2,10 +2,18 @@
 \label{sec:res}
 
 \subsection{TS Results}
-\todo[inline]{Graf her}
 
-As can be observed in the graph, the TS configuration with the best
-overall benchmark score has degree 1 and distance 9. The speedup with this configuration is 1.031. In general, degree 1 gives decent results, except with distance 10. Increasing the degree only gives worse performance.
+\begin{figure}[h]
+    \begin{centering}
+        \input{tagged-sequential-plot}
+        \caption{Speedup using the tagged sequential prefetcher.}
+        \label{figure:ts}
+    \end{centering}
+\end{figure}
+
+As can be observed in Figure \ref{figure:ts}, the TS configuration with the best
+overall benchmark score has degree 1 and distance 6. The speedup with this configuration is 1.029.
+In general, degree 1 gives decent results, except with distance 10. Increasing the degree only gives worse performance.
 
 The ``\emph{ammp}'' and ``\emph{twolf}'' benchmarks
 gave the lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
@@ -16,6 +24,30 @@ random locations, making it very difficult for the TS prefetcher
 to get any benefit from sequential fetching, which relies on spatial locality.
 
 \subsection{DCPT Results}
+
+\begin{figure}[h]
+    \begin{centering}
+        \input{DCPT-num-deltas-plot}
+        \caption{Speedup using the DCPT prefetcher with 98 entries, and 12 bits for each delta.}
+        \label{figure:dcpt-num-deltas}
+    \end{centering}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{centering}
+        \input{DCPT-table-size-plot}
+        \caption{Speedup using the DCPT prefetcher with 19 deltas per entry, and 12 bits for each delta.}
+        \label{figure:dcpt-table-size}
+    \end{centering}
+\end{figure}
+
+\begin{figure}[h]
+    \begin{centering}
+        \input{DCPT-delta-bits-plot}
+        \caption{Speedup using the DCPT prefetcher with 98 entries, and 19 deltas per entry.}
+        \label{figure:dcpt-delta-bits}
+    \end{centering}
+\end{figure}
 
 \begin{table}[h]
 \centering

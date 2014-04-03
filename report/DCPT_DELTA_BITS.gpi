@@ -5,8 +5,10 @@ set xlabel "Bits per delta"
 set ylabel "Speedup"
 
 set boxwidth 0.25
-set style fill solid
+set style fill pattern border rgb "black"
 
 set key right bottom
+
+set size 0.7, 0.7
 
 plot "DCPT_DELTA_BITS.txt" using 0:2:xtic(1) title "" with boxes
