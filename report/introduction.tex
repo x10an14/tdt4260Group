@@ -13,24 +13,20 @@ memory, and into the cache of the chip requiring the instructions/data for
 computations. \emph{Prefetching} is a method for reducing this gap.
 
 The idea behind prefetching is to have a predictive module moving
-instructions/data from the slower off-chip memory to the much faster cache
-memory on-chip \emph{before} it is needed. Hence, when the processor requires
-new instructions/data, they are already in the cache and can be made use of
-within a small amount of on-chip clock cycles, instead of having to wait for the
-slow off-chip memory.
+instructions/data from the slower off-chip memory into the much faster cache
+memory on-chip \emph{before} it is needed. Hence, when the on-chip processor
+requires new instructions/data, they are already in its cache and can be made
+use of within a small amount of on-chip clock cycles, instead of having to wait
+for the slow off-chip memory.
 
-The purpose of this report is to analyze and compare a DCPT prefetcher with a
-TS prefetcher using the M5 simulator, where both prefetchers
-utilize a maximum of 8KiB. The DCPT prefetcher is implemented according to the
-algorithm presented in ``Storage Efficient Hardware Prefetching using Delta
-Correlation Prediction Tables'' by Grannaes, Jahre, and Natvig~\cite{dcpt}. The
-storage limitation makes it important to examine how the 8KiB can be used most
-efficiently.
+The purpose of this report is to analyze and compare a DCPT prefetcher with a TS
+prefetcher using the M5 simulator, where both prefetchers utilize a maximum of
+8KiB. The DCPT prefetcher is implemented according to the algorithm presented in
+``Storage Efficient Hardware Prefetching using Delta Correlation Prediction
+Tables'' by Grannaes, Jahre, and Natvig~\cite{dcpt}. The storage limitation
+makes it important to examine how the 8KiB can be used most efficiently.
 
 \todo[inline]{We need a small summary of the scheme chapter in the introduction as well!}
 
 \todo[inline]{About the introduction:
-- Introduces the larger research area that the paper is
-a part of\\
-- Introduces the problem at hand\\
 - Explains the scheme\\}

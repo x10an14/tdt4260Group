@@ -8,17 +8,15 @@ more basic Tagged Sequential (TS) prefetcher.
 This report first establishes the two test-parameters for the TS prefetcher;
 degree and distance. Then it establishes the three test-parameters for the DCPT
 prefetcher; number of entries in the table, number of deltas per entry, and size
-of bits used for each delta. We use the M5 simulator to simulate a processor
-running SPEC CPU2000 running benchmark programs with our implemented prefetcher with
-different values for these five test-parameters, to see how the DCPT prefetcher
-compares to the TS prefetcher.
+of bits used for each delta.
 
-The TS prefetcher preforms best with a degree of 1 and a distance of 6 delivering an average speedup of 1.030. The best DCPT prefetcher has table size 98, delta size 12 and ring buffer size 35 and gives an average speedup of 1.033. Speedups from the DCPT is fairly consistent, whereas the preformance of the TS prefetcher varies a lot more from application to application. The final DCPT implementation took 6.4KiB of space. 
+We use the M5 simulator to simulate a processor running SPEC CPU2000 running
+benchmark programs with our implemented prefetcher with different values for
+these five test-parameters, to see how the DCPT prefetcher compares to the TS
+prefetcher.
 
+The TS prefetcher preforms best with a degree of 1 and a distance of 6 delivering an average speedup of 1.030. The best DCPT prefetcher has table size 98, delta size 12 and ring buffer size 35 and gives an average speedup of 1.033. Speedups from the DCPT is fairly consistent, whereas the preformance of the TS prefetcher varies a lot more from application to application.
 
-\todo[inline]{An experienced reader should be able to understand exactly what you
-have done from only reading the abstract. This is different from a summary.
-Should be short, varies from 150 to 200 word maximum. Should include a
-description of the problem, the solution and the main results.}
+The final DCPT implementation took 6.4KiB of space.
 
 \end{abstract}
