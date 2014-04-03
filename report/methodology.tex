@@ -41,15 +41,11 @@ When testing the TS prefetcher, we vary both the \emph{distance} and the
 
 When testing the DCPT prefetcher we vary the \emph{table size}, \emph{delta
 size} and \emph{delta ring buffer size}. Initially, these parameters are set to
-the optimal values according to M. Jahre\cite{dcpt}; table size 98, delta size
-19 and ring buffer size 12.
-
-Although these optimal values are obtained with different benchmarks and with a
+the optimal values found by M. Jahre\cite{dcpt}; table size 98, delta size
+19 and ring buffer size 12. Although these values are obtained with different benchmarks and with a
 maximum 4KiB prefetcher size, it is a reasonable starting point. The impact of
 each parameter is then studied by keeping two of them constant while varying the
-third.
-
-After this analysis we simulate with the optimal values of each parameter.
+third. After this analysis we simulate with the optimal values of each parameter.
 
 \todo[inline]{Explain your experimental setup\\
 - Which simulator did you use?\\
