@@ -10,45 +10,23 @@ def storage_usage(num_deltas, table_size, delta_bits):
 # (NUM_DELTAS, TABLE_SIZE, DELTA_BITS, MAX_DEGREE) 
 
 params = [
-    # Additional NUM_DELTAS data
-    (16, 98, 12, "NUM_DELTAS"),
-    (19, 98, 12, "NUM_DELTAS"),
-    (21, 98, 12, "NUM_DELTAS"),
-    (22, 98, 12, "NUM_DELTAS"),
-    (30, 98, 12, "NUM_DELTAS"),
-    (35, 98, 12, "NUM_DELTAS"),
-    (40, 98, 12, "NUM_DELTAS"),
-    (45, 98, 12, "NUM_DELTAS"),
+    # Try nearby NUM_DELTAS
+    (31,  98, 12, "NUM_DELTAS"),
+    (32,  98, 12, "NUM_DELTAS"),
+    (33,  98, 12, "NUM_DELTAS"),
+    (34,  98, 12, "NUM_DELTAS"),
+    (36,  98, 12, "NUM_DELTAS"),
+    (37,  98, 12, "NUM_DELTAS"),
+    (38,  98, 12, "NUM_DELTAS"),
+    (39,  98, 12, "NUM_DELTAS"),
 
-    # DELTA_BITS 
-    (19, 98,  8, "NUM_DELTAS"),
-    (19, 98,  9, "NUM_DELTAS"),
-    (19, 98, 10, "NUM_DELTAS"),
-    (19, 98, 15, "NUM_DELTAS"),
-
-    # TABLE_SIZE
-    (19,  90, 12, "NUM_DELTAS"),
-    (19,  95, 12, "NUM_DELTAS"),
-    (19,  96, 12, "NUM_DELTAS"),
-    (19, 100, 12, "NUM_DELTAS"),
-    (19, 101, 12, "NUM_DELTAS"),
-    (19, 120, 12, "NUM_DELTAS"),
-    (19, 140, 12, "NUM_DELTAS"),
-    (19, 160, 12, "NUM_DELTAS"),
-    (19, 180, 12, "NUM_DELTAS"),
-
-    # MAX_DEGREE
-    (19,  98, 12, 5),
-    (19,  98, 12, 15),
-    (19,  98, 12, 18),
-    (19,  98, 12, 20),
-    (19,  98, 12, 25),
-
-    # BEST
-    (15,  98, 17, "NUM_DELTAS"),
-    (20,  98, 17, "NUM_DELTAS"),
-    (25,  98, 17, "NUM_DELTAS"),
-    (30,  98, 17, "NUM_DELTAS"),
+    # Try nearby TABLE_SIZES
+    (35,  95, 12, "NUM_DELTAS"),
+    (35,  96, 12, "NUM_DELTAS"),
+    (35,  97, 12, "NUM_DELTAS"),
+    (35,  99, 12, "NUM_DELTAS"),
+    (35, 100, 12, "NUM_DELTAS"),
+    (35, 101, 12, "NUM_DELTAS"),
 ]
 
 source = open("prefetcher.cc").read() 
