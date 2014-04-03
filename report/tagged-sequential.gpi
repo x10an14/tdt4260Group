@@ -1,5 +1,5 @@
-#set terminal epslatex
-#set output "tagged-sequential-plot.tex"
+set terminal epslatex
+set output "tagged-sequential-plot.tex"
 
 set xlabel "Distance"
 set ylabel "Speedup"
@@ -8,13 +8,14 @@ set key right bottom
 
 set style data histogram
 set style histogram cluster gap 1
-set style fill solid border rgb "black"
+set style fill pattern border rgb "black"
 
 set size 0.7, 0.7
 
-plot "tagged-sequential-degree-1-data.txt" using 2:xtic(1) title "Degree = 1", \
-	"tagged-sequential-degree-2-data.txt" using 2:xtic(1) title "Degree = 2", \
-	"tagged-sequential-degree-3-data.txt" using 2:xtic(1) title "Degree = 3", \
-	"tagged-sequential-degree-4-data.txt" using 2:xtic(1) title "Degree = 4"
+set key left top Left reverse
+set yrange [0.92:1.10]
 
-pause -1
+plot "tagged-sequential-degree-1-data.txt" using 2:xtic(1) title "Degree = 1", \
+	 "tagged-sequential-degree-2-data.txt" using 2:xtic(1) title "Degree = 2", \
+	 "tagged-sequential-degree-3-data.txt" using 2:xtic(1) title "Degree = 3", \
+	 "tagged-sequential-degree-4-data.txt" using 2:xtic(1) title "Degree = 4"
