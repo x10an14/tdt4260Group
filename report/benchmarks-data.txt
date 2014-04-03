@@ -1,0 +1,13 @@
+# Benchmark		DCPT			TS
+ammp 			0.999			0.76
+applu 			1 				1.093
+apsi 			1.001 			1.046
+art110 			1.000 			1.056
+art470 			1.000 			1.056
+bzip2\\_graphic 	1.134 			1.092
+bzip2\\_program 	1.044 			1.067
+bzip2\\_source 	1.031 			1.017
+galgel 			0.999 			1.064
+swim 			1.002 			1.045
+twolf 			0.998 			0.985
+wupwise 		1.239			1.226

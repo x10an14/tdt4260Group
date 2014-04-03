@@ -1,0 +1,20 @@
+set terminal epslatex
+set output "benchmarks-plot.tex"
+
+set ylabel "Speedup"
+
+set key right bottom
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill pattern border rgb "black"
+
+set size 0.7, 0.7
+
+set key left top Left reverse
+
+set xtics rotate
+set yrange [0.75:1.35]
+
+plot "benchmarks-data.txt" using 3:xtic(1) title "TS", \
+	 "benchmarks-data.txt" using 2:xtic(1) title "DCPT"
