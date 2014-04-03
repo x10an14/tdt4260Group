@@ -1,5 +1,5 @@
 
-report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-num-deltas-plot.tex tagged-sequential-plot.tex bibliography.bib abstract.tex background.tex config.tex conclusion.tex discussion.tex introduction.tex methodology.tex results.tex the_scheme.tex
+report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-num-deltas-plot.tex tagged-sequential-plot.tex benchmarks-plot.tex bibliography.bib abstract.tex background.tex config.tex conclusion.tex discussion.tex introduction.tex methodology.tex results.tex the_scheme.tex
 	pdflatex --shell-escape report.tex
 	bibtex report.aux
 	pdflatex --shell-escape report.tex
@@ -21,3 +21,6 @@ DCPT-num-deltas-plot.tex : DCPT_NUM_DELTAS.gpi DCPT_NUM_DELTAS.txt
 
 tagged-sequential-plot.tex : tagged-sequential.gpi tagged-sequential-degree-1-data.txt tagged-sequential-degree-5-data.txt
 	gnuplot tagged-sequential.gpi
+
+benchmarks-plot.tex : benchmarks.gpi benchmarks-data.txt
+	gnuplot benchmarks.gpi
