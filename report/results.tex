@@ -2,13 +2,13 @@
 \label{sec:res}
 
 \subsection{TS Results}
+\todo[inline]{Graf her}
 
-The Tagged Sequential prefetcher was simulated with different combinations of
-degree and distance, in the range of 0--6. The combination that got the best
-overall score on the benchmark tests was with degree 5 and distance 4.
+As can be observed in the graph, the TS configuration with the best
+overall benchmark score has degree 1 and distance 9. The speedup with this configuration is 1.031. In general, degree 1 gives decent results, except with distance 10. Increasing the degree only gives worse performance.
 
-The resulting average speedup was 1.032. The ``ammp'' and ``twolf'' benchmarks
-gave lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
+The ``\emph{ammp}'' and ``\emph{twolf}'' benchmarks
+gave the lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
 results below 1.000 means the prefetcher actually slows down the application).
 
 This is expected as those applications need to fetch instructions/data from
