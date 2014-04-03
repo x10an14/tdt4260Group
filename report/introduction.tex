@@ -15,8 +15,8 @@ The idea behind prefetching is to have a predictive module moving
 instructions/data from the slower off-chip memory to the much faster cache
 memory on-chip \emph{before} it is needed. Hence, when the processor requires
 new instructions/data, they are already in the cache and can be made use of
-within a small amount of on-chip clock cycles, isntead of having to wait for the
-slower off-chip.
+within a small amount of on-chip clock cycles, instead of having to wait for the
+slow off-chip memory.
 
 The purpose of this report is to analyze and compare a DCPT prefetcher with a
 Tagged Sequential prefetcher using the M5 simulator, where both prefetchers
