@@ -1,10 +1,16 @@
 \section{Conclusion}
+With optimal parameter configurations, the speedup of the 
+DCPT prefetcher is 1.033, and the speedup of the TS prefetcher is 1.030.
 
 The TS prefetcher only requires one bit per cache line to store
 the associated tag. If the size of the prefetcher is critical, then using Tagged
 Sequential prefetching might be a good alternative. However, the speedup gained
 by the TS prefetcher is not as great as the speedup gained by the
-DCPT prefetcher.
+DCPT prefetcher. Another important observation we made is that for different 
+types of applications the speedup with DCPT is a lot more stable than with TS. 
+This is because the DCPT prefetcher adapts to the application during operation, 
+while the TS prefetcher's behavior is completely static. 
+
 
 \todo[inline]{- Repeat the main results of your work\\
 - Remember that the abstract, introduction and
