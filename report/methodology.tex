@@ -46,14 +46,13 @@ results.
 
 When testing the DCPT prefetcher we vary the \emph{table size}, \emph{delta
 size} and \emph{delta ring buffer size}. Initially, these parameters are set to
-<<<<<<< HEAD
-the optimal values according to
+
+the optimal values found by
 \todo[inline]{Fix the name of below reference. M. Jahre is not good enough}
 M. Jahre\cite{dcpt}; table size 98, delta size 19 and ring buffer size 12.
-
-Although these optimal values are obtained with different benchmarks and with a
-maximum 4KiB prefetcher size, it is a reasonable starting point. The impact of
-each parameter is then studied by keeping two of them constant while varying the
+Although these values are obtained with different benchmarks and with a maximum
+4KiB prefetcher size, it is a reasonable starting point. The impact of each
+parameter is then studied by keeping two of them constant while varying the
 third.
 
 Since our implementation has 8KiB available, double of M. Jahres \cite{dcpt}
@@ -61,13 +60,6 @@ has, we can exploit this by having larger tables, delta-sizes, and ring buffer
 size. Our analysis will reveal wich parameter combinations that works best.
 
 After this analysis we simulate with the optimal values of each parameter.
-=======
-the optimal values found by M. Jahre\cite{dcpt}; table size 98, delta size
-19 and ring buffer size 12. Although these values are obtained with different benchmarks and with a
-maximum 4KiB prefetcher size, it is a reasonable starting point. The impact of
-each parameter is then studied by keeping two of them constant while varying the
-third. After this analysis we simulate with the optimal values of each parameter.
->>>>>>> a0adbccc93fbc3f774a323f9419bbb9e3ca395de
 
 \todo[inline]{Explain your experimental setup\\
 - Which simulator did you use?\\
