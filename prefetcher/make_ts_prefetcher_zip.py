@@ -3,17 +3,13 @@
 import re
 from zipfile import ZipFile
 
-def storage_usage(num_deltas, table_size, delta_bits):
-    entry_size = 3 * 28 + delta_bits * num_deltas
-    return table_size * entry_size
-
 # (DISTANCE, DEGREE) 
 
 #params = [
 #    (42, 1337),
 #]
 
-params = [(distance, degree) for distance in range(2, 13, 2) for degree in range(1, 5)]
+params = [(distance, degree) for distance in range(14, 21, 2) for degree in range(1, 5)]
 
 source = open("ts_54.cc").read() 
 
