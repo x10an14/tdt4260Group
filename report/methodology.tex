@@ -10,16 +10,13 @@ configurations in order to seach for patterns and then optimize each prefetcher
 to the benchmarks used.
 
 \subsection{The M5 Simulator}
-
-The simulations running our tests only utilize a subset of the M5 simulators
-rich feature set~\cite{user_doc}, due to the time limitation of this report. The
-simulator runs several of the SPEC CPU2000 benchmarks available on the pfJudge
-course website~\cite{guidelines} when testing our prefetchers.
-
-The benchmarks considered in this report are; ``\emph{ammp}'', ``\emph{applu}'',
-``\emph{apsi}'', ``\emph{art110}'', ``\emph{art470}'',
-``\emph{bzip2\_graphic}'', ``\emph{bzip2\_program}'', ``\emph{bzip2\_source}'',
-``\emph{galgel}'', ``\emph{swim}'', ``\emph{twolf}'', and ``\emph{wupwise}''.
+The M5 simulator used in our testing only utilizes a subset of its rich
+feature set~\cite{user_doc}, due to the time limitation of this report. The simulator runs several of the SPEC CPU2000 benchmarks available on the
+pfJudge course website~\cite{guidelines}. The benchmarks considered in this
+report are; ``\emph{ammp}'', ``\emph{applu}'', ``\emph{apsi}'',
+``\emph{art110}'', ``\emph{art470}'', ``\emph{bzip2\_graphic}'',
+``\emph{bzip2\_program}'', ``\emph{bzip2\_source}'', ``\emph{galgel}'',
+``\emph{swim}'', ``\emph{twolf}'' and ``\emph{wupwise}''.
 
 It is important that the prefetcher performance is evaluated with a variety of
 benchmarks representing typical applications. The mentioned benchmarks are
@@ -27,8 +24,10 @@ widely used and recognized. We also believe that the results give a proper
 foundation for performance evaluation\footnote{For more information about the
 benchmarks, please see \emph{www.spec.org}.}.
 
-The test result scores reported in the \textit{Results} section are scores given
-to our implemented prefetchers when running the abovementioned benchmarks.
+The prefetcher simulation scores reported in \ref{sec:res} are averages of the 
+the speed-up with the abovementioned benchmarks. The speed-up is a measure on how
+much faster M5 runs (number of instructions per clock cycle) with one of our 
+prefetchers compared to no prefetching at all.
 
 \todo[inline]{Needs more details? I don't know -C}
 
