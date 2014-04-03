@@ -13,7 +13,8 @@ processessor running benchmark programs with our implemented prefetcher with
 different values for these five test-parameters, to see how the DCPT prefetcher
 compares to the TS prefetcher.
 
-\todo[inline]{Lack only describing results in abstract now.}
+The TS prefetcher preforms best with a degree of 1 and a distance of 6 delivering an average speedup of 1.030. The best DCPT prefetcher has table size 98, delta size 12 and ring buffer size 35 and gives an average speedup of 1.033. Speedups from the DCPT is fairly consistent, whereas the preformance of the TS prefetcher varies a lot more from application to application. The final DCPT implementation took 6.4KiB of space. 
+
 
 \todo[inline]{An experienced reader should be able to understand exactly what you
 have done from only reading the abstract. This is different from a summary.

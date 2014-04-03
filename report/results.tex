@@ -49,7 +49,8 @@ The figures below show the results from varying only one of the parameters while
         \label{figure:dcpt-delta-bits}
     \end{centering}
 \end{figure}
-Number of entries in the table shows both 98 and 196 best results. In order to save size, further simulations are therefore done with 98. The simulations above clearly shows that the optimal number of deltas per entry is 35. Bits per delta needs to be at least 11, but preforms best for 17 or more. 
+Number of entries in the table shows both 98 and 196 best results. In order to save size, further simulations are therefore done with 98. The simulations above clearly shows that the optimal number of deltas per entry is 35. 
+Number of bits per delta should be at least 11, but preforms best for 17 or more. 
 \todo[inline]{Christian; refs below are not working, you fix? -I}
 For further optimization, we combine the parameter values that give the best preformance and additionally test them with some minor variations. These results are shown in table \ref{tab:numdelta} to \ref{tab:deltabits}
 
@@ -63,7 +64,7 @@ For further optimization, we combine the parameter values that give the best pre
 1.028 & 1.029 & 1.029 & \textbf{1.033} & 1.027 & 1.028 & 1.027 \\ \hline
 \end{tabular}
 \smallskip
-\caption{Number of deltas}
+\caption{Speedup for number of deltas around the best configuration}
 \end{table}
 
 
@@ -76,7 +77,7 @@ For further optimization, we combine the parameter values that give the best pre
 1.020 & 1.017 & 1.025 & \textbf{1.033} & 1.026 & 1.015 & 1.021 \\ \hline
 \end{tabular}
 \smallskip
-\caption{Table length}
+\caption{Speedup with different number of entries around the best configuration}
 \end{table}
 
 
@@ -89,7 +90,7 @@ For further optimization, we combine the parameter values that give the best pre
 \textbf{1.033} & 1.026 & 1.028 & 1.029 & 1.028 \\ \hline
 \end{tabular}
 \smallskip
-\caption{Bits per delta}
+\caption{Speedup with different number of bits representing each delta around the best configuration}
 \end{table}
 
 None of the variations proved better than the original one.
