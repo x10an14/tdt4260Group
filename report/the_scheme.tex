@@ -3,16 +3,16 @@
 For testing the prefetchers using the M5 simulator, we implement three callbacks
 provided by the framework.
 
-\begin{itemize}
+\begin{enumerate}
 	\item \textbf{prefetch\_init}
 		This function is called before the first memory access to let the
-        prefetchers initialize their data structures.
+		prefetchers initialize their data structures.
 	\item \textbf{prefetch\_access}
 		This function is called whenever the cache is accessed, both for hits and
-        for misses.
+		for misses.
 	\item \textbf{prefetch\_complete}
-        This function is called when a prefetch request has been completed.
-\end{itemize}
+		This function is called when a prefetch request has been completed.
+\end{enumerate}
 
 \subsection{Simulator Setup}
 
