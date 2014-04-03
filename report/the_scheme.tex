@@ -1,4 +1,4 @@
-\section{The Scheme}
+\section{The DCPT And TS Implementation}
 
 For testing the prefetchers using the M5 simulator, we implement three callbacks
 provided by the framework.
@@ -16,9 +16,9 @@ provided by the framework.
 
 \subsection{Simulator Setup}
 
-\todo[inline]{Describing the simulator setup and config values. \\ Describe the
-``default simulator setup'' better. Explicitly state the conditions of the
-default simulator. Don't simply say ``can be studied there.''}
+\todo[inline]{Describing the simulator setup and config values. \\
+Describe the ``default simulator setup'' better. Explicitly state the conditions
+of the default simulator.}
 
 The simulator is configured with a block size of 64 bytes. The largest possible
 memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending
@@ -26,37 +26,31 @@ at once.
 
 \subsection{TS Implementation}
 
-\todo[inline]{Describing our TS implementation. \\
-REMEMBER TO EXPLAIN THE INTERFACE!!}
-
 For the TS implementation, we only implement the
 \textbf{prefetch\_access} function. The implementation directly follows the
 algorithm.
 
+\todo[inline]{Og implementasjonen av prefetch\_access da??? -C}
+
 \subsection{DCPT Implementation}
 
-\todo[inline]{Describing our DCPT implementation. \\
-REMEMBER TO EXPLAIN THE INTERFACE!!}
+\todo[inline]{Describing our DCPT implementation}
 
 The DCPT implementation attempts to follow the pseudocode described in the
 original implementation~\cite{dcpt} as closely as possible.
 
 The data structures are allocated statically, so there is nothing to do in
 \textbf{prefetch\_init}. The main algorithm is implemented in
-\textbf{prefetch\_access}, and in \textbf{prefetch\_complete}, we remove blocks
+\textbf{prefetch\_access}, and in \textbf{prefetch\_complete} we remove blocks
 from the \emph{inFlight} set.
+
+\todo[inline]{Du må forklare hva som gjøres inni hver av funksjonene. ikke bare
+skrive ``Den var implementert. Den var ikke implementert.'' Han vil vite
+\textit{vår implementasjon}, ikke at vi implementerte det... =/}
 
 The prefetcher can be configured by adjusting three parameters; the number of
 entries in the table, the number of deltas per entry and the size in bits of
 each delta.
-
-\todo[inline]{Our prefetcher implementation goes here. Rename the title to ``Our implementation''?\\
-- Explain your scheme in detail\\
-- Choose an informative title\\
-- Trick: Add an informative figure that helps explain
-your scheme\\
-- If your scheme is complex, an informative example
-may be in order\\}
 
 \subsection{Overhead}
 
@@ -69,3 +63,12 @@ independently of the cache and memory sizes. The only limitation being that each
 entry contains three address fields which must be wide enough to cover the
 address space of the system. Apart from that, we can arbitrarily choose the size
 and number of deltas, as well as the number of entries in the table.
+
+\todo[inline]{Kanskje legge inn minium plass nødvendig mhp. address space? Eller
+bare gi en fin formel med de forskjellige variablene?}
+
+\todo[inline]{Explain your scheme in detail\\
+- Trick: Add an informative figure that helps explain
+your scheme\\
+- If your scheme is complex, an informative example
+may be in order\\}
