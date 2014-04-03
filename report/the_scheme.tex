@@ -75,8 +75,16 @@ entry contains three address fields which must be wide enough to cover the
 address space of the system. Apart from that, we can arbitrarily choose the size
 and number of deltas, as well as the number of entries in the table.
 
-\todo[inline]{Kanskje legge inn minium plass nødvendig mhp. address space? Eller
-bare gi en fin formel med de forskjellige variablene?}
+The total storage in bits required by the DCPT implementation is
+
+\begin{equation*}
+V = N_e (3 w_a + N_d w_d) + N_f w_a
+\end{equation*} 
+
+where $N_e$ is the number of entries in the table, $N_d$ is the number of deltas
+per entry, $w_a$ is the number of bits needed to store an address, $w_d$ is the
+number of bits per delta, and $N_f$ is the number of entries in the \emph{inFlight}
+set.
 
 \todo[inline]{Explain your scheme in detail\\
 - Trick: Add an informative figure that helps explain
