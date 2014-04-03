@@ -2,23 +2,16 @@
 
 Hardware components must usually be designed within an area budget, and in order
 to simulate realistic conditions, the implemented prefetchers are limited to a
-maximum of 8KiB memory~\cite{guidelines}. The simulation is performed by the M5
+maximum of 8KiB memory~\cite{guidelines}. The simulations are performed by the M5
 simulator available on the Kongull HPC cluster at NTNU.
 
-The M5 simulator used in our testing was only utilized with a subset of its rich
-feature set~\cite{user_doc}, due to the time limitation of this report.
-
-The test result scores reported in the \textit{Results} section are scores given
-to our implemented prefetchers when running the abovementioned benchmarks.
-
-When testing the Tagged Sequential prefetcher, we vary both the \emph{distance}
-and the \emph{degree} parameters it uses. When testing the DCPT prefetcher we
-vary the \emph{table size}, \emph{delta size}, \emph{delta ring buffer size},
-and \emph{maximum degree} parameters it uses. For both prefetchers, several
-simulations with different combinations of these parameters were run to check
-for patterns.
+Both prefetchers are implemented as described, and then simulated with different 
+configurations in order to seach for patterns and then 
+optimize each prefetcher to the benchmarks used.
 
 \subsection{The M5 Simulator}
+The M5 simulator used in our testing only utilizes a subset of its rich
+feature set~\cite{user_doc}, due to the time limitation of this report.
 
 The M5 simulator runs several of the SPEC CPU2000 benchmarks available on the
 pfJudge course website~\cite{guidelines}. The benchmarks considered in this
@@ -31,14 +24,26 @@ It is important that the prefetcher performance is evaluated with a variety of
 benchmarks representing typical applications. The mentioned benchmarks are
 widely used and recognized. We also believe that the results give a proper
 foundation for performance evaluation\footnote{For more information about the
-benchmarks, please see \emph{www.spec.org}.}.
+benchmarks, please see \emph{www.spec.org}.}. 
+The test result scores reported in the \textit{Results} section are scores given
+to our implemented prefetchers when running the abovementioned benchmarks.
 
 \todo[inline]{Needs more details? I don't know -C}
 
 \subsection{Tagged Sequential Tests}
+When testing the Tagged Sequential prefetcher, we vary both the \emph{distance}
+and the \emph{degree} parameters it uses. The distances tested are in the range of 
+2 to 20, and the degree from 1 to 4. 
 
 \subsection{DCPT Tests}
-
+When testing the DCPT prefetcher we
+vary the \emph{table size}, \emph{delta size} and \emph{delta ring buffer size}. 
+Initially, these parameters are set to the optimal values according to 
+M. Jahre\cite{DCPT}; table size 98, delta size 19 and ring buffer size 12.
+All though these optimal values are obtained with different benchmarks and with a maximum 
+4KiB prefetcher size, it is a reasonable starting point. The impact of each parameter is 
+then studied by keeping two of them constant while varying the third. After this analysis
+we simulate with the optimal values of each parameter. 
 
 \todo[inline]{Explain your experimental setup\\
 - Which simulator did you use?\\
