@@ -1,7 +1,7 @@
 \section{Background}
 
 In this section, we go over the algorithmic details of the two prefetchers we
-have chosen to implement, detailing how our implemented prefetchers are intended
+have chosen to implement, detailing how we intend our implemented prefetchers
 to work.
 
 \subsection{TS Prefetching Algorithm}
@@ -29,10 +29,10 @@ The DCPT prefetcher uses a more advanced algorithm. It is an instruction-based
 prefetcher using a table indexed by the address of the instruction which tried
 to access memory.
 
-The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
-so organizing the memory effectively is an important aspect. In the original
-implementation~\cite{dcpt} we based our implementation on, only 4KiB of storage
-are used.
+Each entry in this table utilizes a ring buffer for keeping track of the deltas,
+and therefore organizing the memory this table needs effectively is an important
+aspect. In the original implementation~\cite{dcpt} which we based our
+implementation on, only 4KiB of storage are used.
 
 Each entry contains a ring buffer of the most recent deltas between successive
 addresses accessed by this instruction.
@@ -45,14 +45,3 @@ The prefetcher then adds the found delta pattern to the current address to
 obtain the predicted stream of future accesses. It discards addresses which
 are already in the cache, or ones that are already being prefetched. It then
 issues prefetch commands for the remaining addresses.
-
-\todo[inline]{Related Work\\
-- Reference the work that other researchers have done
-that is related to your scheme\\
-- Should be complete (i.e. contain all relevant work)\\
-- Remember: you define the scope of your work\\
-Can be split into two sections: Background and Related
-Work\\
-- Background is an informative introduction to the field (often section 2)\\
-- Related work is a very dense section that includes all relevant
-references (often section n-1)\\}
