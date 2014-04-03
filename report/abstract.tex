@@ -5,10 +5,15 @@ Prediction Table (DCPT) prefetcher. We perform and study a number of experiments
 to properly analyze the prefetcher. We also compare the DCPT prefetcher with a
 more basic Tagged Sequential (TS) prefetcher.
 
-\todo[inline]{Decide whether to keep this sentence:
-We analyze the performance by changing three
-different parameters; the number of entries in the table of the prediction
-table, the size of each delta ring buffer, and the size of each DCPT entry.}
+This report first establishes the two test-parameters for the TS prefetcher;
+degree and distance. Then it establishes the three test-parameters for the DCPT
+prefetcher; number of entries in the table, number of deltas per entry, and size
+of bits used for each delta. We use the M5 simulator to simulate a SPEC CPU2000
+processessor running benchmark programs with our implemented prefetcher with
+different values for these five test-parameters, to see how the DCPT prefetcher
+compares to the TS prefetcher.
+
+\todo[inline]{Lack only describing results in abstract now.}
 
 \todo[inline]{An experienced reader should be able to understand exactly what you
 have done from only reading the abstract. This is different from a summary.
