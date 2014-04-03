@@ -1,7 +1,10 @@
 \section{The DCPT And TS Implementation}
 
-For testing the prefetchers using the M5 simulator, we implement three callbacks
-provided by the framework.
+\label{section:scheme}
+
+For testing the prefetchers using the M5 simulator, we have been given a simple
+framework which takes care of most of the work of setting up and interfacing with
+M5. This framework requires us to implement three callbacks. 
 
 \begin{enumerate}
 	\item \textbf{prefetch\_init}
@@ -51,13 +54,14 @@ The DCPT implementation attempts to follow the pseudocode described in the
 original implementation~\cite{dcpt} as closely as possible.
 
 The data structures are allocated statically, so there is nothing to do in
-\textbf{prefetch\_init}. The main algorithm is implemented in
-\textbf{prefetch\_access}, and in \textbf{prefetch\_complete} we remove blocks
-from the \emph{inFlight} set.
+\textbf{prefetch\_init}.
 
-\todo[inline]{Du må forklare hva som gjøres inni hver av funksjonene. ikke bare
-skrive ``Den var implementert. Den var ikke implementert.'' Han vil vite
-\textit{vår implementasjon}, ikke at vi implementerte det... =/}
+The main algorithm is implemented in
+\textbf{prefetch\_access}. When the cache is accessed, the prefetcher looks up the entry corresponding to the current program counter (PC), re-initializing the entry if it was currently in use by another instruction. It then compares the current address with the last address accessed by the current instruction and inserts the delta between these addresses into the ring buffer.
+
+The prefetcher then searches the ring buffer for patterns matching the last two deltas, and uses the longest matching sequence of deltas to predict which addresses will be accessed next. It then performs some sanity checks to verify that the candidate addresses are not in the cache, not in the MSHR queue and not already queued for prefetching, before issuing the prefetch of the block containing this address.
+
+In \textbf{prefetch\_complete} we remove blocks from the \emph{inFlight} set, used to keep track of blocks which are currently queued for prefetching.
 
 The prefetcher can be configured by adjusting three parameters; the number of
 entries in the table, the number of deltas per entry and the size in bits of
