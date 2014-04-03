@@ -7,13 +7,13 @@ previously mentioned M5 simulator. The M5 simulator runs several of the SPEC
 CPU2000 benchmarks available on the pfJudge course website~\cite{guidelines}, so
 that the prefetcher performance can be evaluated with different types benchmarks
 representing typical examples of different types of applications. Only a subset
-of M5's rich feature set, chapter 2~\cite{user_doc} was utilized in our testing,
+of M5's rich feature set~\cite[Ch.~2]{user_doc} was utilized in our testing,
 due to the time limitation of this report.
 
 Both the Tagged Sequential prefetcher and the DCPT prefetcher were implemented
 based on the following three missing functions in the framework provided to us
-by the course, chapter 3~\cite{user_doc}.
-\begin{itemize}
+by the course\cite[Ch.~3]{user_doc}.
+\begin{enumerate}
 	\item \textbf{void prefetch\_init(void)}
 		This function will be called before any memory access, to let our
 		implemeneted prefetchers initialize their data structures.
@@ -22,7 +22,7 @@ by the course, chapter 3~\cite{user_doc}.
 	\item \textbf{void prefetch\_complete(Addr addr)}
 		This function notifies the implemented prefetcher about a prefetch load
 		that has just completed.
-\end{itemize}
+\end{enumerate}
 
 In the framework our prefetchers are implemented in, a cache word is 64 bits
 large, and there are 64 cache words per cache block. Our prefetcher is used for
@@ -99,7 +99,7 @@ REMEMBER TO EXPLAIN THE INTERFACE!!}
 With the given implementation, a Tagged Sequential prefetcher simply requires
 one bit per cacheword to store the associated tag. With our L2 cache size, cache block size, and word size, this equates to needing $131$~$072$ tag bits to
 represent all the cache words. This amount equates to 16KiB of memory, or in
-other words $\frac{1}{512} \approx 2\%$ of the L2 cache used for overhead.
+other words $\frac{1}{512} \approx 0.2\%$ of the L2 cache used for overhead.
 
 The amount of storage used by the DCPT prefetcher however can be configured
 independently of the cache and memory sizes. The only limitation being that each
