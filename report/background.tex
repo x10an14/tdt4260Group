@@ -4,10 +4,10 @@ In this section, we go over the algorithmic details of the two prefetchers we
 have chosen to implement, detailing how our implemented prefetchers are intended
 to work.
 
-\subsection{Tagged Sequential Prefetching Algorithm}
+\subsection{TS Prefetching Algorithm}
 
 The simplest prefetcher is the Sequential prefetcher, which fetches the next
-block of data \cite{seq}. The Tagged Sequential prefetcher is a slight
+block of data \cite{seq}. The TS prefetcher is a slight
 improvement over the Sequential prefetcher. As with Sequential prefetching the
 spatial locality of data is exploited.
 
@@ -18,7 +18,7 @@ prefetch. Subsequent blocks are prefetched into the cache when there has been a
 cache miss, or when a previously prefetched cache entry has been
 accessed~\cite{grannaes}.
 
-The Tagged Sequential prefetcher can be configured by adjusting two parameters;
+The TS prefetcher can be configured by adjusting two parameters;
 the \emph{distance} is how many blocks ahead of the currently accessed block the
 prefetcher will fetch, and the \emph{degree} is how many consequtive blocks it
 will fetch starting at this location in memory.
@@ -27,11 +27,20 @@ will fetch starting at this location in memory.
 
 The DCPT prefetcher uses a more advanced algorithm. It is an instruction-based
 prefetcher using a table indexed by the address of the instruction which tried
-to access memory. Each entry contains a ring buffer of the most recent deltas
-between successive addresses accessed by this instruction. When an access
-happens, the prefetcher examines the two most recent deltas and searches the
-ring buffer for patterns beginning with these two deltas. If there are multiple
-matches, we choose the longest matching sequence of deltas.
+to access memory.
+
+The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
+so organizing the memory effectively is an important aspect. In the original
+implementation~\cite{dcpt} we based our implementation on, only 4KiB of storage
+are used.
+
+Each entry contains a ring buffer of the most recent deltas between successive
+addresses accessed by this instruction.
+
+When an access happens, the prefetcher
+examines the two most recent deltas and searches the ring buffer for patterns
+beginning with these two deltas. If there are multiple matches, we choose the
+longest matching sequence of deltas.
 
 The prefetcher then adds the found delta pattern to the current address to
 obtain the predicted stream of future accesses. It discards addresses which

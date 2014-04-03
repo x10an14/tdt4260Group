@@ -8,29 +8,28 @@ provided by the framework.
 		This function is called before the first memory access to let the
 		prefetchers initialize their data structures.
 	\item \textbf{prefetch\_access}
-		This function is called whenever the cache is accessed, both for hits and
-		for misses.
+		This function is called whenever the cache is accessed, both for hits
+		and for misses.
 	\item \textbf{prefetch\_complete}
 		This function is called when a prefetch request has been completed.
 \end{enumerate}
 
 \subsection{Simulator Setup}
 
-\todo[inline]{Describing the simulator setup and config values. \\
-Describe the ``default simulator setup'' better.
-Explicitly state the conditions of the default simulator. Don't simply say ``can
-be studied there.''}
+\todo[inline]{Describing the simulator setup and config values. \\ Describe the
+``default simulator setup'' better. Explicitly state the conditions of the
+default simulator. Don't simply say ``can be studied there.''}
 
 The simulator is configured with a block size of 64 bytes. The largest possible
-memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending at
-once.
+memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending
+at once.
 
-\subsection{Tagged Sequential Implementation}
+\subsection{TS Implementation}
 
-\todo[inline]{Describing our Tagged Sequential implementation. \\
+\todo[inline]{Describing our TS implementation. \\
 REMEMBER TO EXPLAIN THE INTERFACE!!}
 
-For the tagged sequential implementation, we only implement the
+For the TS implementation, we only implement the
 \textbf{prefetch\_access} function. The implementation directly follows the
 algorithm.
 
@@ -43,18 +42,13 @@ The DCPT implementation attempts to follow the pseudocode described in the
 original implementation~\cite{dcpt} as closely as possible.
 
 The data structures are allocated statically, so there is nothing to do in
-\textbf{prefetch\_init}. The main algorithm is implemented in \textbf{prefetch\_access},
-and in \textbf{prefetch\_complete}, we remove blocks from the \emph{inFlight}
-set.
+\textbf{prefetch\_init}. The main algorithm is implemented in
+\textbf{prefetch\_access}, and in \textbf{prefetch\_complete}, we remove blocks
+from the \emph{inFlight} set.
 
-The prefetcher can be configured by adjusting three parameters; the number of entries
-in the table, the number of deltas per entry and the size in bits of each delta.
-
-\todo[inline]{The following paragraph belongs in the background -ANDREAS-}
-The DCPT utilizes a table of ring buffers for keeping track of the deltas, and
-so organizing the memory effectively is an important aspect. In the original
-implementation~\cite{dcpt} we based our implementation on, only 4KiB of storage
-are used.
+The prefetcher can be configured by adjusting three parameters; the number of
+entries in the table, the number of deltas per entry and the size in bits of
+each delta.
 
 \todo[inline]{Our prefetcher implementation goes here. Rename the title to ``Our implementation''?\\
 - Explain your scheme in detail\\
@@ -66,8 +60,8 @@ may be in order\\}
 
 \subsection{Overhead}
 
-The Tagged Sequential prefetcher requires one bit per cache block to store the
-associated tag. Since each cache line is 64 bytes, this amounts to about 0.2\%
+The TS prefetcher requires one bit per cache block to store the
+associated tag. Since each cache block is 64 bytes, this amounts to about 0.2\%
 overhead.
 
 The amount of storage used by the DCPT prefetcher, however, can be configured
