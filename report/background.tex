@@ -29,8 +29,7 @@ to access memory. Each entry contains a ring buffer of the most recent deltas
 between successive addresses accessed by this instruction. When an access
 happens, the prefetcher examines the two most recent deltas and searches the
 ring buffer for patterns beginning with these two deltas. If there are multiple
-matches, we choose the longest match.
-\todo[inline]{Re-phrase ``we choos the longest match''?? -C}
+matches, we choose the longest matching sequence of deltas.
 
 The prefetcher then adds the found delta pattern to the current address to
 obtain the predicted stream of future accesses. It discards addresses which

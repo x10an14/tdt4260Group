@@ -24,12 +24,9 @@ by the course\cite[Ch.~3]{user_doc}.
 		that has just completed.
 \end{enumerate}
 
-In the framework our prefetchers are implemented in, a cache word is 64 bits
-large, and there are 64 cache words per cache block. Our prefetcher is used for
-the Level 2 (L2) cache, which is 1MiBs large. This means that the L2 cache has
-space for $\frac{8 \cdot 1024^{2}}{64} = 131$~$072$ cache words. Since a cache
-block consists of 64 cache words, there's space for $\frac{8 \cdot 1024^{2}}{64
-\cdot 64} = 2048$ cache blocks in the L2 cache.
+In the framework our prefetchers are implemented in, a cache block is 64 Bytes
+large. Our prefetcher is used for the Level 2 (L2) cache, which is 1MiBs large.
+This means that the L2 cache has space for a total of $16$~$384$ cache blocks.
 
 \subsection{Simulator Setup}
 
