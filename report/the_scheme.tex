@@ -1,10 +1,9 @@
 \section{The DCPT And TS Implementation}
-
 \label{section:scheme}
 
 For testing the prefetchers using the M5 simulator, we have been given a simple
 framework which takes care of most of the work of setting up and interfacing with
-M5. This framework requires us to implement three callbacks. 
+M5. This framework requires us to implement three callbacks.
 
 \begin{enumerate}
 	\item \textbf{prefetch\_init}
@@ -27,21 +26,27 @@ The simulator is configured with a block size of 64 bytes. The largest possible
 memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending
 at once.
 
+\todo[inline]{Above to-do is not complete. Nico told me each time I was in the
+office that we needed to expand on this. I believe he meant for us to look into
+the configurations described in the user\_doc source and repeat (in shorter
+words) what it says about the M5 configuration.}
+
 \subsection{TS Implementation}
 
-For the TS prefetcher is implemented within the functions
-\textbf{prefetch\_access} and \textbf{prefetch\_complete}. The 
-implementation directly follows the algorithm. 
-\textbf{prefetch\_complete} simply sets the prefetch bit on all the 
-blocks that are prefetched into the cache, to keep track on the cache content 
-that originates from prefetching. When data is accessed by the CPU 
-\textbf{prefetch\_access} will check if the 
-prefetch bit of the respective data is set. If the bit is set, and if successive 
-data is not already in the cache, prefetching will be requested. 
-The function also requests prefetching of successive data when a cache 
-miss is reported. Prefetching is performed with the given degree 
-and distance in both cases.
+The TS prefetcher is implemented within the functions \textbf{prefetch\_access}
+and \textbf{prefetch\_complete}. The implementation directly follows the
+algorithm.
 
+\textbf{prefetch\_complete} simply sets the prefetch bit on all the blocks that
+are prefetched into the cache, to keep track on the cache content that
+originates from prefetching. When data is accessed by the CPU
+\textbf{prefetch\_access} will check if the prefetch bit of the respective data
+is set. If the bit is set, and if successive data is not already in the cache,
+prefetching will be requested.
+
+The function also requests prefetching of successive data when a cache miss is
+reported. Prefetching is performed with the given degree and distance in both
+cases.
 
 \subsection{DCPT Implementation}
 
@@ -50,12 +55,23 @@ original implementation~\cite{dcpt} as closely as possible.
 
 The prefetcher allocates the data structures statically, so there is nothing to do in \textbf{prefetch\_init}.
 
-The main algorithm is implemented in
-\textbf{prefetch\_access}. When the cache is accessed, the prefetcher looks up the entry corresponding to the current program counter (PC), re-initializing the entry if it was currently in use by another instruction. It then compares the current address with the last address accessed by the current instruction and inserts the delta between these addresses into the ring buffer.
+The main algorithm is implemented in \textbf{prefetch\_access}. When the cache
+is accessed, the prefetcher looks up the entry corresponding to the current
+program counter (PC), re-initializing the entry if it was currently in use by
+another instruction. It then compares the current address with the last address
+accessed by the current instruction and inserts the delta between these
+addresses into the ring buffer.
 
-The prefetcher then searches the ring buffer for patterns matching the last two deltas, and uses the longest matching sequence of deltas to predict which addresses will be accessed next. It then performs some sanity checks to verify that the candidate addresses are not in the cache, not in the MSHR queue and not already queued for prefetching, before issuing the prefetch of the block containing this address.
+The prefetcher then searches the ring buffer for patterns matching the last two
+deltas, and uses the longest matching sequence of deltas to predict which
+addresses will be accessed next. It then performs some sanity checks to verify
+that the candidate addresses are not in the cache, the MSHR queue, and not
+already queued for prefetching, before issuing the prefetch of the block
+containing this address.
 
-In \textbf{prefetch\_complete} the prefetcher removes blocks from the \emph{inFlight} set, used to keep track of blocks which are currently queued for prefetching.
+In \textbf{prefetch\_complete} the prefetcher removes blocks from the
+\emph{inFlight} set, used to keep track of blocks which are currently queued for
+prefetching.
 
 The prefetcher can be configured by adjusting three parameters; the number of
 entries in the table, the number of deltas per entry and the size in bits of
@@ -63,9 +79,9 @@ each delta.
 
 \subsection{Overhead}
 
-The TS prefetcher requires one bit per cache block to store the
-associated tag. Since each cache block is 64 bytes, this amounts to about 0.2\%
-overhead.
+The TS prefetcher requires one bit per cache block to store the associated tag.
+Since the L2 cache is 1MiB, and each cache block is 64 bytes, this amounts to
+$\frac{1}{512} \approx 0.2\%$ overhead.
 
 The amount of storage used by the DCPT prefetcher, however, can be configured
 independently of the cache and memory sizes. The only limitation being that each
@@ -74,12 +90,10 @@ address space of the system. Apart from that, we can arbitrarily choose the size
 and number of deltas, as well as the number of entries in the table.
 
 The total storage in bits required by the DCPT implementation is
-
 \begin{equation*}
 V = N_e (3 w_a + N_d w_d) + N_f w_a
-\end{equation*} 
-
+\end{equation*}
 where $N_e$ is the number of entries in the table, $N_d$ is the number of deltas
 per entry, $w_a$ is the number of bits needed to store an address, $w_d$ is the
-number of bits per delta, and $N_f$ is the number of entries in the \emph{inFlight}
-set.
+number of bits per delta, and $N_f$ is the number of entries in the
+\emph{inFlight} set.
