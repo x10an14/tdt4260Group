@@ -1,32 +1,18 @@
 \section{The Scheme}
 
-In this section, we explain our implementation and its setup.
+For testing the prefetchers using the M5 simulator, we implement three callbacks
+provided by the framework.
 
-The prefetchers we are creating for this project will be tested by the
-previously mentioned M5 simulator. The M5 simulator runs several of the SPEC
-CPU2000 benchmarks available on the pfJudge course website~\cite{guidelines}, so
-that the prefetcher performance can be evaluated with different types benchmarks
-representing typical examples of different types of applications. Only a subset
-of M5's rich feature set~\cite[Ch.~2]{user_doc} was utilized in our testing,
-due to the time limitation of this report.
-
-Both the Tagged Sequential prefetcher and the DCPT prefetcher were implemented
-based on the following three missing functions in the framework provided to us
-by the course\cite[Ch.~3]{user_doc}.
-\begin{enumerate}
-	\item \textbf{void prefetch\_init(void)}
-		This function will be called before any memory access, to let our
-		implemeneted prefetchers initialize their data structures.
-	\item \textbf{void prefetch\_access(AccessStat stat)}
-		This function tells the implemented prefetcher about a cache access.
-	\item \textbf{void prefetch\_complete(Addr addr)}
-		This function notifies the implemented prefetcher about a prefetch load
-		that has just completed.
-\end{enumerate}
-
-In the framework our prefetchers are implemented in, a cache block is 64 Bytes
-large. Our prefetcher is used for the Level 2 (L2) cache, which is 1MiBs large.
-This means that the L2 cache has space for a total of $16$~$384$ cache blocks.
+\begin{itemize}
+	\item \textbf{prefetch\_init}
+		This function is called before the first memory access to let the
+        prefetchers initialize their data structures.
+	\item \textbf{prefetch\_access}
+		This function is called whenever the cache is accessed, both for hits and
+        for misses.
+	\item \textbf{prefetch\_complete}
+        This function is called when a prefetch request has been completed.
+\end{itemize}
 
 \subsection{Simulator Setup}
 
@@ -35,74 +21,18 @@ Describe the ``default simulator setup'' better.
 Explicitly state the conditions of the default simulator. Don't simply say ``can
 be studied there.''}
 
-Table~\ref{tab:prefetch-consts} lists the limits of the parameters the m5
-simulator has.
-\begin{table}[h]
-	\caption{Interface definitions}
-	\begin{tabularx}{\linewidth}{|X|c|X|}
-	\hline
-	Variable & Value & Description \\
-	\hline
-	BLOCK\_SIZE & 64 & Size of cache blocks (cache lines) in bytes \\
-	\hline
-	MAX\_QUEUE\_SIZE & 100 & Maximum number of pending prefetch requests \\
-	\hline
-	MAX\_PHYS\_MEM\_SIZE & $2^{28}$-1 & The largest possible physical memory address \\
-	\hline
-	\end{tabularx}
-	\label{tab:prefetch-consts}
-\end{table}
-
-\begin{itemize}
-	\item \textbf{BLOCK\_SIZE:} \\
-		Since the cache-memory only transfers blocks of memory, we can with this
-		variable define the size of the blocks fetched from memory. The larger
-		the blocks, the more words, hence less misses due to more words loaded.
-		However, if the block sizes are too big, then there cannot be a lot of
-		them in the cache at any given time, since it's effectiveness then
-		requires the program to perform the majority of its loads/stores from
-		the same memory block. So for it to be effective, it requires the
-		program not to fetch from different blocks. (Which is unrealistic). The
-		optimum is therefore a balanced block size.
-	\item \textbf{MAX\_QUEUE\_SIZE:} \\
-		Since (to simulate realism) the prefetchers are required to operate
-		within the 8KiB memory limit, we cannot hold an infinite amount of
-		memory. This includes the list used to decide which memory blocks to
-		fetch next. If this list is too large, it may fetch blocks which are not
-		yet needed into a full cache, resulting in an eviction of a memory block
-		still needed from the cache. If this list is too small, it could result
-		in the memory blocks required next not having been fetched into the
-		cache at the time needed. Hence, the optimum should be a balanced list
-		size, not fetching so far ahead that the cache needs to evict memory
-		blocks \textit{still in use}, but neither so that memory blocks
-		\textit{needed next} are not already in the cache.
-	\item \textbf{MAX\_PHYS\_MEM\_SIZE:}
-		Since the prefetcher deals with addresses, the maxiumum size of physical
-		memory decides both the addresspace (which has direct consequences for
-		the space the prefetcher needs to store these addresses with regards to
-		the 8KiB limitation), and how many words (which are then grouped in
-		blocks decided by the \textbf{BLOCK\_SIZE} variable) the memory holds.
-		The larger this variable is, there is a bigger potential for more
-		fetching from different disparate blocks, than if this variable is
-		small, results in the opposite; a smaller total of words in the physical
-		memory.
-\end{itemize}
+The simulator is configured with a block size of 64 bytes. The largest possible
+memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending at
+once.
 
 \subsection{Tagged Sequential Implementation}
 
 \todo[inline]{Describing our Tagged Sequential implementation. \\
 REMEMBER TO EXPLAIN THE INTERFACE!!}
 
-With the given implementation, a Tagged Sequential prefetcher simply requires
-one bit per cacheword to store the associated tag. With our L2 cache size, cache block size, and word size, this equates to needing $131$~$072$ tag bits to
-represent all the cache words. This amount equates to 16KiB of memory, or in
-other words $\frac{1}{512} \approx 0.2\%$ of the L2 cache used for overhead.
-
-The amount of storage used by the DCPT prefetcher however can be configured
-independently of the cache and memory sizes. The only limitation being that each
-entry contains three address fields which must be wide enough to cover the
-address space of the system. Apart from that, we can arbitrarily choose the size
-and number of deltas, as well as the number of entries in the table.
+For the tagged sequential implementation, we only implement the
+\textbf{prefetch\_access} function. The implementation directly follows the
+algorithm.
 
 \subsection{DCPT Implementation}
 
@@ -110,13 +40,12 @@ and number of deltas, as well as the number of entries in the table.
 REMEMBER TO EXPLAIN THE INTERFACE!!}
 
 The DCPT implementation attempts to follow the pseudocode described in the
-original implementation~\cite{dcpt}, as closely as possible. However because we
-are simulating a hardware implementation, there are some additional checks in
-place to deal
-\todo[inline]{Nico told us to ignore all things done by compiler. Hence, the below sentence was to be removed he felt. But I didn't write this, so I don't know if this should be removed completely or replaced with something else. -C}
-with the fact that the bit sizes some of the fields in the data
-structures are larger than they would be in hardware, so we have to limit them
-artificially.
+original implementation~\cite{dcpt} as closely as possible.
+
+The data structures are allocated statically, so there is nothing to do in
+\textbf{prefetch\_init}. The main algorithm is implemented in \textbf{prefetch\_access},
+and in \textbf{prefetch\_complete}, we remove blocks from the \emph{inFlight}
+set.
 
 The prefetcher can be configured by adjusting four parameters; the number of entries
 in the table, the number of deltas per entry and the size in bits of each delta.
@@ -134,3 +63,15 @@ are used.
 your scheme\\
 - If your scheme is complex, an informative example
 may be in order\\}
+
+\subsection{Overhead}
+
+The Tagged Sequential prefetcher requires one bit per cache block to store the
+associated tag. Since each cache line is 64 bytes, this amounts to about 0.2\%
+overhead.
+
+The amount of storage used by the DCPT prefetcher, however, can be configured
+independently of the cache and memory sizes. The only limitation being that each
+entry contains three address fields which must be wide enough to cover the
+address space of the system. Apart from that, we can arbitrarily choose the size
+and number of deltas, as well as the number of entries in the table.
