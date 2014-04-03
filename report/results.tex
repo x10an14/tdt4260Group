@@ -49,9 +49,9 @@ The figures below show the results from varying only one of the parameters while
         \label{figure:dcpt-delta-bits}
     \end{centering}
 \end{figure}
+Number of entries in the table shows both 98 and 196 best results. In order to save size, further simulations are therefore done with 98. The simulations above clearly shows that the optimal number of deltas per entry is 35. Bits per delta needs to be at least 11, but preforms best for 17 or more. 
 \todo[inline]{Christian; refs below are not working, you fix? -I}
-To optimize the prefetcher, we combine the parameter values that give the best preformance and additionally test them with some minor variations. These results are shown in table \ref{tab:numdelta} to \ref{tab:deltabits}
-
+For further optimization, we combine the parameter values that give the best preformance and additionally test them with some minor variations. These results are shown in table \ref{tab:numdelta} to \ref{tab:deltabits}
 
 
 \begin{table}[h]
@@ -92,10 +92,7 @@ To optimize the prefetcher, we combine the parameter values that give the best p
 \caption{Bits per delta}
 \end{table}
 
-
-Test \ref{tab:numdelta} is before \ref{tab:tablesize}, but \ref{tab:deltabits} is last.
-
-
+None of the variations proved better than the original one.
 
 \todo[inline]{The results goes here.
 \\
