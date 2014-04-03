@@ -22,10 +22,10 @@ The benchmarks considered in this report are; ``\emph{ammp}'', ``\emph{applu}'',
 ``\emph{galgel}'', ``\emph{swim}'', ``\emph{twolf}'', and ``\emph{wupwise}''.
 
 It is important that the prefetcher performance is evaluated with a variety of
-benchmarks representing typical applications. The mentioned benchmarks are
-widely used and recognized. We also believe that the results give a proper
-foundation for performance evaluation\footnote{For more information about the
-benchmarks, please see \emph{www.spec.org}.}.
+benchmarks representing typical applications, to ensure its robustness. The
+mentioned benchmarks are widely used and recognized. We also believe that the
+results give a proper foundation for performance evaluation\footnote{For more
+information about the benchmarks, please see \emph{www.spec.org}.}.
 
 The test result scores reported in the \textit{Results} section are scores given
 to our implemented prefetchers when running the abovementioned benchmarks.
@@ -37,6 +37,11 @@ to our implemented prefetchers when running the abovementioned benchmarks.
 When testing the TS prefetcher, we vary both the \emph{distance} and the
 \emph{degree} parameters it uses. The distances tested are in the range of 2 to
 20, and the degree from 1 to 4.
+
+The intention of testing the TS prefetcher, is to have a benchmark to compare
+the DCPT prefetcher against. Hence, we use the averaged scores given by the
+pfJudge website~\cite[Sec.~2.5]{guidelines} of this course when comparing
+results.
 
 \subsection{DCPT Tests}
 
