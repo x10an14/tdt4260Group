@@ -2,7 +2,6 @@
 \label{sec:res}
 
 \subsection{TS Results}
-\todo[inline]{Graf her}
 
 \begin{figure}[h]
     \begin{centering}
@@ -11,6 +10,20 @@
         \label{figure:ts}
     \end{centering}
 \end{figure}
+
+As can be observed in Figure \ref{figure:ts}, the TS configuration with the best
+overall benchmark score has degree 1 and distance 6. The speedup with this configuration is 1.029.
+In general, degree 1 gives decent results, except with distance 10. Increasing the degree only gives worse performance.
+
+The ``\emph{ammp}'' and ``\emph{twolf}'' benchmarks
+gave the lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
+results below 1.000 means the prefetcher actually slows down the application).
+
+This is expected as those applications need to fetch instructions/data from
+random locations, making it very difficult for the TS prefetcher
+to get any benefit from sequential fetching, which relies on spatial locality.
+
+\subsection{DCPT Results}
 
 \begin{figure}[h]
     \begin{centering}
@@ -35,20 +48,6 @@
         \label{figure:dcpt-delta-bits}
     \end{centering}
 \end{figure}
-
-As can be observed in Figure \ref{figure:ts}, the TS configuration with the best
-overall benchmark score has degree 1 and distance 6. The speedup with this configuration is 1.029.
-In general, degree 1 gives decent results, except with distance 10. Increasing the degree only gives worse performance.
-
-The ``\emph{ammp}'' and ``\emph{twolf}'' benchmarks
-gave the lowest speedups, with a speedup of 0.759 and 0.983 respectively (speedup
-results below 1.000 means the prefetcher actually slows down the application).
-
-This is expected as those applications need to fetch instructions/data from
-random locations, making it very difficult for the TS prefetcher
-to get any benefit from sequential fetching, which relies on spatial locality.
-
-\subsection{DCPT Results}
 
 \begin{table}[h]
 \begin{tabular}{|l|l|l|l|l|l|l|}
