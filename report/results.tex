@@ -25,6 +25,7 @@ to get any benefit from sequential fetching, which relies on spatial locality.
 
 \subsection{DCPT Results}
 
+The figures below show the results from varying only one of the parameters while keeping the others constant.
 \begin{figure}[h]
     \begin{centering}
         \input{DCPT-num-deltas-plot}
@@ -48,6 +49,10 @@ to get any benefit from sequential fetching, which relies on spatial locality.
         \label{figure:dcpt-delta-bits}
     \end{centering}
 \end{figure}
+\todo[inline]{Christian; refs below are not working, you fix? -I}
+To optimize the prefetcher, we combine the parameter values that give the best preformance and additionally test them with some minor variations. These results are shown in table \ref{tab:numdelta} to \ref{tab:deltabits}
+
+
 
 \begin{table}[h]
 \centering
@@ -61,8 +66,6 @@ to get any benefit from sequential fetching, which relies on spatial locality.
 \caption{Number of deltas}
 \end{table}
 
- 
-some text
 
 \begin{table}[h]
 \centering
@@ -76,8 +79,6 @@ some text
 \caption{Table length}
 \end{table}
 
-
-some more text
 
 \begin{table}[h]
 \centering
