@@ -6,18 +6,20 @@ to work.
 
 \subsection{Tagged Sequential Prefetching Algorithm}
 
-The simplest of the two prefetchers is the Sequential prefetcher, which fetches
-the next block of data \cite{seq}. The Tagged Sequential prefetcher is a slight
-improvement over the Sequential prefetcher. As with sequential prefetching the
-spatial locality of data is exploited. Additionally, a tagging system is used to
-mark the cache blocks that have been prefetched. The tagging system is used to
-recognize when a pre-fetched cache block is actually accessed by the
-application, which implies that there has been a successful prefetch. Subsequent
-blocks are prefetched into the cache when there has been a cache miss, or when a
-previously prefetched cache entry has been accessed~\cite{grannaes}.
+The simplest prefetcher is the Sequential prefetcher, which fetches the next
+block of data \cite{seq}. The Tagged Sequential prefetcher is a slight
+improvement over the Sequential prefetcher. As with Sequential prefetching the
+spatial locality of data is exploited.
 
-The Tagged Sequential prefetcher can be configured by adjusting two parameters.
-The \emph{distance} is how many blocks ahead of the currently accessed block the
+Additionally, a tagging system is used to mark the cache blocks that have been
+prefetched. This system is used to recognize when a prefetched cache block is
+accessed by the application, which implies that there has been a successful
+prefetch. Subsequent blocks are prefetched into the cache when there has been a
+cache miss, or when a previously prefetched cache entry has been
+accessed~\cite{grannaes}.
+
+The Tagged Sequential prefetcher can be configured by adjusting two parameters;
+the \emph{distance} is how many blocks ahead of the currently accessed block the
 prefetcher will fetch, and the \emph{degree} is how many consequtive blocks it
 will fetch starting at this location in memory.
 

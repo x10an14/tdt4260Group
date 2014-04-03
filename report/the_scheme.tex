@@ -3,16 +3,16 @@
 For testing the prefetchers using the M5 simulator, we implement three callbacks
 provided by the framework.
 
-\begin{itemize}
+\begin{enumerate}
 	\item \textbf{prefetch\_init}
 		This function is called before the first memory access to let the
-        prefetchers initialize their data structures.
+		prefetchers initialize their data structures.
 	\item \textbf{prefetch\_access}
 		This function is called whenever the cache is accessed, both for hits and
-        for misses.
+		for misses.
 	\item \textbf{prefetch\_complete}
-        This function is called when a prefetch request has been completed.
-\end{itemize}
+		This function is called when a prefetch request has been completed.
+\end{enumerate}
 
 \subsection{Simulator Setup}
 
@@ -47,7 +47,7 @@ The data structures are allocated statically, so there is nothing to do in
 and in \textbf{prefetch\_complete}, we remove blocks from the \emph{inFlight}
 set.
 
-The prefetcher can be configured by adjusting four parameters; the number of entries
+The prefetcher can be configured by adjusting three parameters; the number of entries
 in the table, the number of deltas per entry and the size in bits of each delta.
 
 \todo[inline]{The following paragraph belongs in the background -ANDREAS-}
