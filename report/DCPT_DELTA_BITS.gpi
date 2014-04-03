@@ -1,10 +1,12 @@
+set terminal epslatex
+set output "DCPT-delta-bits-plot.tex"
 
-set xlabel "DELTA_BITS"
+set xlabel "Bits per delta"
 set ylabel "Speedup"
+
+set boxwidth 0.25
+set style fill solid
 
 set key right bottom
 
-plot 	"DCPT_DELTA_BITS.txt" using 1:2 title "Delta Bits" with linespoints \
-
-
-pause -1
+plot "DCPT_DELTA_BITS.txt" using 0:2:xtic(1) title "" with boxes

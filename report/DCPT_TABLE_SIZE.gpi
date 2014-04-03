@@ -1,10 +1,12 @@
+set terminal epslatex
+set output "DCPT-table-size-plot.tex"
 
-set xlabel "TABLE_SIZE"
+set xlabel "Number of entries in the table"
 set ylabel "Speedup"
+
+set boxwidth 0.25
+set style fill solid
 
 set key right bottom
 
-plot		"DCPT_TABLE_SIZE.txt" using 1:2 title "TABLE_SIZE" with linespoints
-
-
-pause -1
+plot "DCPT_TABLE_SIZE.txt" using 0:2:xtic(1) title "" with boxes

@@ -1,10 +1,12 @@
+set terminal epslatex
+set output "DCPT-num-deltas-plot.tex"
 
-set xlabel "NUM_DELTAS"
+set xlabel "Deltas per entry"
 set ylabel "Speedup"
+
+set boxwidth 0.25
+set style fill solid
 
 set key right bottom
 
-plot		"DCPT_NUM_DELTAS.txt" using 1:2 title "NUM_DELTAS" with linespoints
-
-
-pause -1
+plot "DCPT_NUM_DELTAS.txt" using 0:2:xtic(1) title "" with boxes
