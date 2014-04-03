@@ -29,10 +29,10 @@ benchmarks, please see \emph{www.spec.org}.}.
 The prefetcher simulation scores reported in~\ref{sec:res} are averages of the
 the speed-up with the abovementioned benchmarks. The speed-up is a measure on how
 much faster M5 runs (number of instructions per clock cycle) with one of our
-prefetchers compared to no prefetching at all.
+prefetchers compared to no prefetching at all. 
 
-Beyond what the given framework implementation extends the simulator, we are not
-extending or configuring it any further.
+We are not extending the simulator any further than what is already done in the 
+framework described in \ref{section:scheme}.
 
 \todo[inline]{Needs more details? I don't know -C}
 
@@ -40,12 +40,9 @@ extending or configuring it any further.
 
 When testing the TS prefetcher, we vary both the \emph{distance} and the
 \emph{degree} parameters it uses. The distances tested are in the range of 2 to
-20, and the degree from 1 to 4.
-
-The intention of testing the TS prefetcher, is to have a benchmark to compare
-the DCPT prefetcher against. Hence, we use the averaged scores given by the
-pfJudge website~\cite[Sec.~2.5]{guidelines} of this course when comparing
-results.
+20, and the degree from 1 to 4. The main intention of testing the TS prefetcher 
+is to have something to compare
+the DCPT prefetcher to.
 
 \subsection{DCPT Tests}
 
