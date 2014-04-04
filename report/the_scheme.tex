@@ -20,7 +20,10 @@ M5. This framework requires us to implement three callbacks.
 
 The simulator is configured with a block size of 64 bytes. The largest possible
 memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending
-at once. We use a two level cache setup where the level 2 (L2) is 1MiB. 
+at once. M5 is configured with a two level cache setup where level 2 (L2) is 1MiB, 
+and level 1 (L1) is split into a 32KiB instruction cache and a 64KiB data
+cache. We implement the prefetcher for the L2 cache, and there is no prefetching 
+for the L1 cache. 
 
 \todo[inline]{Above to-do is not complete. Nico told me each time I was in the
 office that we needed to expand on this. I believe he meant for us to look into
