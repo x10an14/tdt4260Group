@@ -1,12 +1,10 @@
 \section{Methodology}
 
-Hardware components must usually be designed within an area budget, and in order
-to simulate realistic conditions, the implemented prefetchers are limited to a
-maximum of 8KiB memory~\cite{guidelines}. The simulations are performed by the
+The simulations are performed by the
 M5 simulator available on the Kongull HPC cluster at NTNU.
 
 Both prefetchers are implemented as described, and then simulated with different
-configurations in order to seach for patterns and then optimize each prefetcher
+configurations in order to search for patterns and then optimize each prefetcher
 to the benchmarks used.
 
 \subsection{The M5 Simulator}
@@ -22,17 +20,17 @@ and ``\emph{wupwise}''.
 
 It is important that the prefetcher performance is evaluated with a variety of
 benchmarks representing typical applications. The mentioned benchmarks are
-widely used and recognized. We also believe that the results give a proper
-foundation for performance evaluation\footnote{For more information about the
+widely used and recognized. We believe that the results give a proper
+foundation for a performance evaluation\footnote{For more information about the
 benchmarks, please see \emph{www.spec.org}.}.
 
-The prefetcher simulation scores reported in~\ref{sec:res} are averages of the
+The prefetcher simulation scores reported in section~\ref{sec:res} are averages of the
 the speed-up with the abovementioned benchmarks. The speed-up is a measure on
 how much faster M5 runs (number of instructions per clock cycle) with one of our
 prefetchers compared to no prefetching at all.
 
 We are not extending the simulator any further than what is already done in the
-framework described in \ref{section:scheme}.
+framework described in section~\ref{section:scheme}.
 
 \subsection{TS Tests}
 

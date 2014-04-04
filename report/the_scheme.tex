@@ -16,6 +16,10 @@ M5. This framework requires us to implement three callbacks.
 		This function is called when a prefetch request has been completed.
 \end{enumerate}
 
+Hardware components must usually be designed within an area budget, and in order
+to simulate realistic conditions, the implemented prefetchers are limited to a
+maximum of 8KiB memory~\cite{guidelines}.
+
 \subsection{Simulator Setup}
 
 The simulator is configured with a block size of 64 bytes. The largest possible
@@ -25,25 +29,19 @@ and level 1 (L1) is split into a 32KiB instruction cache and a 64KiB data
 cache. We implement the prefetcher for the L2 cache, and there is no prefetching 
 for the L1 cache. 
 
-\todo[inline]{Above to-do is not complete. Nico told me each time I was in the
-office that we needed to expand on this. I believe he meant for us to look into
-the configurations described in the user\_doc source and repeat (in shorter
-words) what it says about the M5 configuration.}
-
 \subsection{TS Implementation}
 
 The TS prefetcher is implemented within the functions \textbf{prefetch\_access}
 and \textbf{prefetch\_complete}. The implementation directly follows the
-algorithm.
+algorithm. 
 
 \textbf{prefetch\_complete} simply sets the prefetch bit on all the blocks that
 are prefetched into the cache, to keep track on the cache content that
 originates from prefetching. When data is accessed by the CPU
 \textbf{prefetch\_access} will check if the prefetch bit of the respective data
 is set. If the bit is set, and if successive data is not already in the cache,
-prefetching will be requested.
-
-The function also requests prefetching of successive data when a cache miss is
+prefetching will be requested. The function also requests prefetching of successive 
+data when a cache miss is
 reported. Prefetching is performed with the given degree and distance in both
 cases.
 
