@@ -4,20 +4,11 @@
 computers of tomorrow. The problem occurs when the on-chip speed of computations
 exceed the on-chip memory capacities, creating the situation where computing
 circuitry has to lie idle waiting for instructions/data to arrive from off-chip
-memory locations. The cache is generally considered the quickest, most
-expensive, and smallest memory, usually residing as closely on-chip as possible.
+memory locations. 
 
-Because of this, a time-gap occurs when the on-chip circuitry needs to wait some
-clock-cycles for the the correct instructions/data to be fetched from off-chip
-memory, and into the cache of the chip requiring the instructions/data for
-computations. \emph{Prefetching} is a method for reducing this gap.
+The cache is generally considered the quickest, most expensive, and smallest memory, usually residing as closely on-chip as possible. A time-gap occurs when the on-chip circuitry needs to wait some clock-cycles for the the correct instructions/data to be fetched from the slower off-chip memory, and into the cache of the chip requiring the instructions/data for computations. \emph{Prefetching} is a method for reducing this gap.
 
-The idea behind prefetching is to have a predictive module moving
-instructions/data from the slower off-chip memory into the much faster cache
-memory on-chip \emph{before} it is needed. Hence, when the on-chip processor
-requires new instructions/data, they are already in its cache and can be made
-use of within a small amount of on-chip clock cycles, instead of having to wait
-for the slow off-chip memory.
+The idea behind prefetching is to have a predictive module moving structions/data from the off-chip memory into the much faster cache memory on-chip \emph{before} it is needed. Hence, when the on-chip processor requires new tions/data, they are already in its cache and can be made use of within a small amount of on-chip clock cycles, instead of having to wait for the off-chip memory.
 
 The purpose of this report is to analyze and compare a DCPT prefetcher with a TS
 prefetcher using the M5 simulator, where both prefetchers utilize a maximum of
