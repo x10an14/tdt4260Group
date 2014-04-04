@@ -18,13 +18,9 @@ M5. This framework requires us to implement three callbacks.
 
 \subsection{Simulator Setup}
 
-\todo[inline]{Describing the simulator setup and config values. \\
-Describe the ``default simulator setup'' better. Explicitly state the conditions
-of the default simulator.}
-
 The simulator is configured with a block size of 64 bytes. The largest possible
 memory address is $2^{28}-1$, and up to 100 prefetching requests can be pending
-at once.
+at once. We use a two level cache setup where the level 2 (L2) is 1MiB. 
 
 \todo[inline]{Above to-do is not complete. Nico told me each time I was in the
 office that we needed to expand on this. I believe he meant for us to look into
