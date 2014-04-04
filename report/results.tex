@@ -56,7 +56,7 @@ keeping the others constant.
 
 We obtain the best results with 98 or 196 entries in the table. In order to save
 size, further simulations are therefore done with 98 entries. The simulations
-above clearly shows that the optimal number of deltas per entry is 35. The
+ clearly shows that the optimal number of deltas per entry is 35. The
 number of bits per delta needs to be at least 11, but the performance is best
 with 17 or more bits per delta.
 
@@ -112,7 +112,7 @@ None of the variations proved better than the original one.
 \subsection{Best Results}
 
 Figure \ref{figure:benchmarks-plot} shows the results from each of the SPEC
-CPU2000 benchmarks for both TS and DCPT with optmial parameter values.
+CPU2000 benchmarks for both TS and DCPT with optimal parameter values.
 
 \begin{figure}[h!]
 	\begin{centering}
@@ -121,9 +121,3 @@ CPU2000 benchmarks for both TS and DCPT with optmial parameter values.
 		\label{figure:benchmarks-plot}
 	\end{centering}
 \end{figure}
-
-\todo[inline]{
-- Prefetching: Best case is that all L2 accesses are hits\\
-Sensitivity analysis: \\
-- Check the impact of model assumptions on your
-scheme}
