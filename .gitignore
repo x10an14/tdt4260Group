@@ -27,6 +27,12 @@
 *.bbl
 *.blg
 
+# Beamer files
+*.nav
+*.out
+*.snm
+*.toc
+
 # Compiled graphs
 *-plot.eps
 *-plot.tex

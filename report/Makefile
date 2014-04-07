@@ -5,10 +5,13 @@ report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-nu
 	pdflatex --shell-escape report.tex
 	pdflatex --shell-escape report.tex #Two runs for references
 
-all: report.pdf
+slides.pdf: slides.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-num-deltas-plot.tex tagged-sequential-plot.tex benchmarks-plot.tex
+	pdflatex --shell-escape slides.tex
+
+all: report.pdf slides.pdf
 
 clean:
-	rm -f *.aux *.log *.pdf *.loc *.lot *.toc *.lof *-plot.eps *-plot.tex
+	rm -f *.aux *.log *.pdf *.loc *.lot *.toc *.lof *-plot.eps *-plot.tex *.nav *.out *.snm *.toc
 
 DCPT-delta-bits-plot.tex : DCPT_DELTA_BITS.gpi DCPT_DELTA_BITS.txt
 	gnuplot DCPT_DELTA_BITS.gpi
