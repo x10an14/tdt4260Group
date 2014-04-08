@@ -1,0 +1,60 @@
+\documentclass{beamer}
+
+\usepackage{graphicx}
+\usepackage[update,prepend]{epstopdf}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+\title{A DCPT Analysis}
+\subtitle{A comparison with Tagged Sequential}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Test Parameters}
+	TS Test Parameters:
+	\begin{itemize}
+		\item Degree and Distance
+	\end{itemize}
+	DCPT Test Paramaters:
+	\begin{itemize}
+		\item Bits per Delta
+		\item Delta amount
+		\item Table size
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Tagged Sequential}
+	\begin{itemize}
+		\item Degree and Distance
+	\end{itemize}
+	\input{tagged-sequential-plot}
+\end{frame}
+
+\begin{frame}{DCPT, Bits per Delta}
+	\begin{itemize}
+		\item Bits per Delta
+	\end{itemize}
+	\input{DCPT-delta-bits-plot}
+\end{frame}
+
+\begin{frame}{DCPT, number of Deltas per Entry}
+	\begin{itemize}
+		\item Delta Amount
+	\end{itemize}
+	\input{DCPT-num-deltas-plot}
+\end{frame}
+
+\begin{frame}{DCPT, number of Entries in Table}
+	\begin{itemize}
+		\item Table size
+	\end{itemize}
+	\input{DCPT-table-size-plot}
+\end{frame}
+
+\begin{frame}{Individual benchmarks}
+	\input{benchmarks-plot}
+\end{frame}
+
+\end{document}
