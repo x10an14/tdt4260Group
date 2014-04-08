@@ -5,7 +5,7 @@ report.pdf: report.tex DCPT-delta-bits-plot.tex DCPT-table-size-plot.tex DCPT-nu
 	pdflatex --shell-escape report.tex
 	pdflatex --shell-escape report.tex #Two runs for references
 
-all: report.pdf
+all: clean report.pdf
 
 clean:
 	rm -f *.aux *.log *.pdf *.loc *.lot *.toc *.lof *-plot.eps *-plot.tex
